@@ -30,23 +30,22 @@
         if (Request.IsAuthenticated)
         {
 
-            @Html.ActionLink("Dairy Area", "Dairy", "Home");
+            @Html.ActionLink("User Area", "User", "Home");
             @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Fruit Area", "Fruit", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Meat Area", "Meat", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Vegetables Area", "Vegetables", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-
+            @Html.ActionLink("Profile Area", "Profile", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");            
         }
     }
 
     @{
         if (Request.IsAuthenticated && User.IsInRole("Admin"))
         {
-            @Html.ActionLink("AddProduct", "AdminProductAdd", "Home");
+            @Html.ActionLink("Orders", "AdminOrders", "Home");
             @Html.Raw("&nbsp;|&nbsp;");
+            @Html.ActionLink("Products", "AdminProducts", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");
+            @Html.ActionLink("Suppliers", "AdminSuppliers", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");            
         }
     }
     
