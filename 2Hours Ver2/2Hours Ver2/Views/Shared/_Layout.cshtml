@@ -26,6 +26,36 @@
         </div>
     </div>
 
+    @{
+        if (Request.IsAuthenticated)
+        {
+
+            @Html.ActionLink("Dairy Area", "Dairy", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");
+            @Html.ActionLink("Fruit Area", "Fruit", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");
+            @Html.ActionLink("Meat Area", "Meat", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");
+            @Html.ActionLink("Vegetables Area", "Vegetables", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");
+
+        }
+    }
+
+    @{
+        if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("AddProduct", "AdminProductAdd", "Home");
+            @Html.Raw("&nbsp;|&nbsp;");
+        }
+    }
+    
+    @Html.Raw("[")
+    @Html.Raw(User.Identity.Name)
+    @Html.Raw("]")
+    @Html.ActionLink("Logout", "Logout", "Home")
+    <br />
+
     <div class="container body-content">
         @RenderBody()
         <hr />
