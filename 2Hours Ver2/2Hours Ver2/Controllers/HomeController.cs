@@ -103,7 +103,7 @@ namespace _2Hours_Ver2.Controllers
             authenticationManager.SignOut();
             return RedirectToAction("Login", "Home");
         }
-
+        /*
         [HttpGet]
         public ActionResult AddRole()
         {
@@ -264,7 +264,7 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult PasswordReset()
         {
             return View();
-        }
+        }*/
 
     }
 }

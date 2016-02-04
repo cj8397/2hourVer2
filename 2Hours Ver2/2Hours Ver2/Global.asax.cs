@@ -24,7 +24,7 @@ namespace _2Hours_Ver2
             AntiForgeryConfig.SuppressIdentityHeuristicChecks = true;
 
         }
-
+        /*
         void Application_PostAuthenticateRequest()
         {
             if (User.Identity.IsAuthenticated)
@@ -42,7 +42,7 @@ namespace _2Hours_Ver2
                 HttpContext.Current.User = Thread.CurrentPrincipal =
                                            new GenericPrincipal(User.Identity, roles);
             }
-        }
+        }*/
     }
 
 
