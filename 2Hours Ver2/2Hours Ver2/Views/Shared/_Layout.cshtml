@@ -21,6 +21,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@Url.Action("ViewCart", "Home")" data-toggle="tooltip" title="Cart">
+                            <span class="glyphicon glyphicon-shopping-cart" data-toggle="tooltip" title="Cart"></span> Shopping Cart
+                            @if (Session["shoppingCart"] != null)
+                            {
+                                <span class="badge">@Session["shoppingCart"]</span>
+                            }
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
