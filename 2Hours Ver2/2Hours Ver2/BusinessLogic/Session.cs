@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2Hours_Ver2;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace shoppingCart.BusinessLogic
     {
         public const string SESSION_START   = "Session_Start";
         public const string SESSION_END     = "Session_End";
-        private MergeEntities db     = new ShoppingCartEntities();
+        private mergedEntities db     = new mergedEntities();
 
         // Get data stored under the current session.
         // This data is stored on the server in a collection.
@@ -94,16 +95,16 @@ namespace shoppingCart.BusinessLogic
         //remove all items from cart
         public void RemoveItems(string sessionID)
         {
-            var productVisits = db.ProductVisits
+            var orderDetails = db.OrderDetails
                 .Where(v => v.sessionID == sessionID);
-            RemoveProductVisits(productVisits.ToList());
+            RemoveProductVisits(orderDetails.ToList());
         }
 
-        public void RemoveProductVisits(List<ProductVisit> productVisits)
+        public void RemoveProductVisits(List<OrderDetail> productVisits)
         {
             if (productVisits.Any())
             {
-                productVisits.ForEach(pv => db.ProductVisits.Remove(pv));
+                productVisits.ForEach(pv => db.OrderDetails.Remove(pv));
                 db.SaveChanges();
             }
         }
@@ -118,8 +119,8 @@ namespace shoppingCart.BusinessLogic
                     var visitExp = db.Visits.FirstOrDefault(v => v.started == item);
                     if (visitExp != null)
                     {
-                        bool isUpdated = db.ProductVisits
-                            .Where(x => x.sessionID == visitExp.sessionID && End < x.updated)
+                        bool isUpdated = db.OrderDetails
+                            .Where(x => x.sessionID == visitExp.sessionID && End < x.updatedSession)
                             .Any();
                         if (!isUpdated)
                         {
@@ -136,7 +137,7 @@ namespace shoppingCart.BusinessLogic
         {
             if (SessionID != null)
             {
-                var expSession = db.ProductVisits.Where(e => End > e.updated);
+                var expSession = db.OrderDetails.Where(e => End > e.updatedSession);
 
                 RemoveProductVisits(expSession.ToList());
 
