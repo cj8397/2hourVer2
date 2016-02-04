@@ -33,7 +33,7 @@
             @Html.ActionLink("User Area", "_User", "Home");
             @Html.Raw("&nbsp;|&nbsp;");
             @Html.ActionLink("Profile Area", "_Profile", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");            
+            @Html.Raw("&nbsp;|&nbsp;");
         }
     }
 
@@ -45,14 +45,19 @@
             @Html.ActionLink("Products", "AdminProduct", "Home");
             @Html.Raw("&nbsp;|&nbsp;");
             @Html.ActionLink("Suppliers", "AdminSupplier", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");            
+            @Html.Raw("&nbsp;|&nbsp;");
         }
     }
-    
-    @Html.Raw("[")
-    @Html.Raw(User.Identity.Name)
-    @Html.Raw("]")
-    @Html.ActionLink("Logout", "Logout", "Home")
+@{
+    if (Request.IsAuthenticated)
+    {
+
+        @Html.Raw("[")
+        @Html.Raw(User.Identity.Name)
+        @Html.Raw("]")
+        @Html.ActionLink("Logout", "Logout", "Home")
+    }
+}
     <br />
 
     <div class="container body-content">
