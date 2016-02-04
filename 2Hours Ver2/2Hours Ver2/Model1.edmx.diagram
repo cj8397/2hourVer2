@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c1154b5b1e4c4b88bb7f6a8f3c5ca58a" Name="Diagram1">
+        <EntityTypeShape EntityType="hoursMergedModel.Category" Width="1.5" PointX="7.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.OrderDetail" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.Product" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.Supplier" Width="1.5" PointX="7.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.UserProfile" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.Visit" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetRole" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetUser" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="hoursMergedModel.FK__Product__producT__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__OrderDeta__sessi__47A6A41B" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__OrderDeta__userI__46B27FE2" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__Product__supplie__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__UserProfile__Id__3C34F16F" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
