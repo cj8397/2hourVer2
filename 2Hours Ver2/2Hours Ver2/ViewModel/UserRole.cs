@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _2Hours_Ver2.ViewModel
 {
-    class UserRole
+    public class UserRole
     {
         public string UserName { get; set; }
         public string RoleName { get; set; }
