@@ -30,9 +30,9 @@
         if (Request.IsAuthenticated)
         {
 
-            @Html.ActionLink("User Area", "User", "Home");
+            @Html.ActionLink("User Area", "_User", "Home");
             @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Profile Area", "Profile", "Home");
+            @Html.ActionLink("Profile Area", "_Profile", "Home");
             @Html.Raw("&nbsp;|&nbsp;");            
         }
     }
@@ -42,9 +42,9 @@
         {
             @Html.ActionLink("Orders", "AdminOrders", "Home");
             @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Products", "AdminProducts", "Home");
+            @Html.ActionLink("Products", "AdminProduct", "Home");
             @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Suppliers", "AdminSuppliers", "Home");
+            @Html.ActionLink("Suppliers", "AdminSupplier", "Home");
             @Html.Raw("&nbsp;|&nbsp;");            
         }
     }
