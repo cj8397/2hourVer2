@@ -31,4 +31,4 @@ namespace _2Hours_Ver2.ViewModel
         public string ConfirmPassword { get; set; }
     }
 }
-}
+
