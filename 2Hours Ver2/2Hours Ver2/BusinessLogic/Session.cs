@@ -10,7 +10,7 @@ namespace shoppingCart.BusinessLogic
     {
         public const string SESSION_START   = "Session_Start";
         public const string SESSION_END     = "Session_End";
-        private ShoppingCartEntities db     = new ShoppingCartEntities();
+        private MergeEntities db     = new ShoppingCartEntities();
 
         // Get data stored under the current session.
         // This data is stored on the server in a collection.

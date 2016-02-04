@@ -37,4 +37,3 @@ namespace _2Hours_Ver2.ViewModels
         public decimal Total { get; set; }
     }
 }
-}
