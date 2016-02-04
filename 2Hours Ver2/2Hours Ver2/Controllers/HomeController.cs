@@ -238,6 +238,7 @@ namespace _2Hours_Ver2.Controllers
         [Authorize]
         public ActionResult _Profile()
         {
+
             return View();
         }
 
