@@ -232,6 +232,7 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLogic\Session.cs" />
     <Compile Include="Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -285,9 +286,11 @@
     <Compile Include="UserProfile.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Login.cs" />
-    <Compile Include="ViewModel\RegisteredUser.cs" />
-    <Compile Include="ViewModel\UserRole.cs" />
+    <Compile Include="ViewModels\CartItem.cs" />
+    <Compile Include="ViewModels\OrderDetails.cs" />
+    <Compile Include="ViewModels\Login.cs" />
+    <Compile Include="ViewModels\RegisteredUser.cs" />
+    <Compile Include="ViewModels\UserRole.cs" />
     <Compile Include="Visit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
