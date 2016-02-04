@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,8 @@ namespace _2Hours_Ver2.ViewModels
 {
     public class OrderDetails
     {
+        public IEnumerable<CartItem> CartItems { get; set; }
+
         [Display(Name = "Sub-Total")]
         public decimal SubTotal
         {
@@ -36,5 +39,4 @@ namespace _2Hours_Ver2.ViewModels
 
         public decimal Total { get; set; }
     }
-}
 }

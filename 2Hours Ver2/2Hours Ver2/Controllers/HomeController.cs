@@ -11,8 +11,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-
-
+using _2Hours_Ver2.Models;
 
 namespace _2Hours_Ver2.Controllers
 {
