@@ -16,6 +16,12 @@ namespace _2Hours_Ver2.Controllers
         private ShoppingCart shoppingCart = new ShoppingCart();
         private Session session = new Session();
 
+        public ActionResult Index()
+        {
+            var products = db.Products.ToList();
+            return View(products);
+        }
+
         public ActionResult Add(int productID)
         {
             var item = shoppingCart.GetItem(productID, session.SessionID);
@@ -39,7 +45,7 @@ namespace _2Hours_Ver2.Controllers
                 if (ModelState.IsValid)
                 {
                     string sessionId = session.SessionID;
-                    shoppingCart.StoreItem(item.ProductID, item.Quantity, sessionId);
+                    shoppingCart.AddItem(item.ProductID, item.Quantity, sessionId);
                     return RedirectToAction("ViewCart");
                 }
                 return View("Add");

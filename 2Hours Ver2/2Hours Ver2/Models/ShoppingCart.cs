@@ -31,13 +31,14 @@ namespace _2Hours_Ver2.Models
         public CartItem GetItem(int productID, string sessionID)
         {
             var item = GetAllItems(sessionID)
-                          .Where(op => op.ProductID == productID)
+                          .Where(op => op.SessionID == sessionID && op.ProductID == productID)
                           .Select(op => new CartItem
                           {
-                              ProductID = op.ProductID,
+                              ProductID  = op.ProductID,
                               ProductName = op.ProductName,
-                              Price = op.Price,
-                              Quantity = op.Quantity
+                              Price       = op.Price,
+                              Quantity    = op.Quantity,
+                              SessionID   = op.SessionID
 
                           }).FirstOrDefault();
             return item;
@@ -45,25 +46,33 @@ namespace _2Hours_Ver2.Models
 
         public CartItem NewCartItem(int productID, string sessionID, int? quantity = null)
         {
-            StoreItem(productID, quantity, sessionID);
+            AddItem(productID, quantity, sessionID);
             return GetItem(productID, sessionID);
         }
 
-        public void StoreItem(int productID, int? qty, string sessionID)
+        public void AddItem(int productID, int? qty, string sessionID)
         {
-            var item = new OrderProduct();
-            item.sessionID = sessionID;
-            item.quantity = qty;
-            item.productID = productID;
-            item.updatedSession = DateTime.Now;
-
-            if (db.Visits.Any(s => s.sessionID == sessionID))
+            try
             {
-                isValidItem(sessionID, productID);
-            }
+                var item = new OrderProduct();
+                item.sessionID = sessionID;
+                item.quantity = qty;
+                item.productID = productID;
+                item.updatedSession = DateTime.Now;
 
-            db.OrderProducts.Add(item);
-            db.SaveChanges();
+                if (db.Visits.Any(v => v.sessionID == sessionID))
+                {
+                    isValidItem(sessionID, productID);
+                }
+
+                db.OrderProducts.Add(item);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
 
         }
 
@@ -75,7 +84,7 @@ namespace _2Hours_Ver2.Models
                 {
                     if (isValidItem(sessionID, item.ProductID))
                     {
-                        StoreItem(item.ProductID, item.Quantity, sessionID);
+                        AddItem(item.ProductID, item.Quantity, sessionID);
                     }
                 }
 

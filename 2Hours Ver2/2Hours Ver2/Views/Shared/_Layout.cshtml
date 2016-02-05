@@ -17,10 +17,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("2hours", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Shop Now", "Index", "Cart")</li>
                     @{
                         if (Request.IsAuthenticated)
                         {
@@ -46,7 +47,7 @@
 
                     }
                     <li>
-                        <a href="@Url.Action("ViewCart", "Products")" data-toggle="tooltip" title="Cart">
+                        <a href="@Url.Action("ViewCart", "Cart")" data-toggle="tooltip" title="Cart">
                             <span class="glyphicon glyphicon-shopping-cart" data-toggle="tooltip" title="Cart"></span> Shopping Cart
                             @if (Session["shoppingCart"] != null)
                             {

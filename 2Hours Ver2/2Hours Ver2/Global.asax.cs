@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Helpers;
 using System.Threading;
 using System.Security.Principal;
+using shoppingCart.BusinessLogic;
 
 namespace _2Hours_Ver2
 {
@@ -24,16 +25,38 @@ namespace _2Hours_Ver2
             AntiForgeryConfig.SuppressIdentityHeuristicChecks = true;
 
         }
-        /*
+
+        protected void Session_Start()
+        {
+            Session session = new Session();
+            var id = session.SessionID;
+
+            // remove expired sessions
+            session.RemoveExpired(id);
+            // check for duplicates
+            session.ValidateSession(id);
+            // add session to visit tbl
+            session.CastSession(id);
+        }
+
+        protected void Session_End()
+        {
+            var elapsed = this.Session.SessionID;
+            Session session = new Session();
+            // remove all products from productvisit tbl
+            session.RemoveItems(elapsed);
+
+        }
+
         void Application_PostAuthenticateRequest()
         {
             if (User.Identity.IsAuthenticated)
             {
                 var name = User.Identity.Name; // Get current user name.
 
-                hoursLoginEntities context = new hoursLoginEntities();
-                var user = context.AspNetUsers.Where(u => u.UserName == name).FirstOrDefault();
-                IQueryable<string> roleQuery = from u in context.AspNetUsers
+                mergedEntities db = new mergedEntities();
+                var user = db.AspNetUsers.Where(u => u.UserName == name).FirstOrDefault();
+                IQueryable<string> roleQuery = from u in db.AspNetUsers
                                                from r in u.AspNetRoles
                                                where u.UserName == Context.User.Identity.Name
                                                select r.Name;
@@ -42,7 +65,7 @@ namespace _2Hours_Ver2
                 HttpContext.Current.User = Thread.CurrentPrincipal =
                                            new GenericPrincipal(User.Identity, roles);
             }
-        }*/
+        }
     }
 
 

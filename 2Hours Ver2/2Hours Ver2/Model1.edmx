@@ -22,8 +22,6 @@
           <Property Name="totalPrice" Type="money" />
           <Property Name="Id" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderProduct">
           <Key>
             <PropertyRef Name="sessionID" />
@@ -134,7 +132,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK__OrderDetail__Id__6225902D">
+        <Association Name="FK__OrderDetail__Id__74444068">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -146,7 +144,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__order__640DD89F">
+        <Association Name="FK__OrderProd__order__7720AD13">
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,7 +156,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__produ__65F62111">
+        <Association Name="FK__OrderProd__produ__7908F585">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,7 +168,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__sessi__6501FCD8">
+        <Association Name="FK__OrderProd__sessi__7814D14C">
           <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -182,7 +180,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__producT__5B78929E">
+        <Association Name="FK__Product__producT__6D9742D9">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,7 +192,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__supplie__5C6CB6D7">
+        <Association Name="FK__Product__supplie__6E8B6712">
           <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -296,6 +294,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
         <EntityContainer Name="hoursMergedModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="2hours" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="2hours" store:Type="Tables" />
+          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="2hours" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="2hours" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="2hours" store:Type="Tables" />
           <EntitySet Name="Visit" EntityType="Self.Visit" Schema="2hours" store:Type="Tables" />
@@ -306,36 +305,27 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" store:Type="Tables" store:Schema="2hours">
-            <DefiningQuery>SELECT 
-    [OrderProduct].[sessionID] AS [sessionID], 
-    [OrderProduct].[productID] AS [productID], 
-    [OrderProduct].[quantity] AS [quantity], 
-    [OrderProduct].[updatedSession] AS [updatedSession], 
-    [OrderProduct].[orderNumber] AS [orderNumber]
-    FROM [2hours].[OrderProduct] AS [OrderProduct]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__OrderDetail__Id__6225902D" Association="Self.FK__OrderDetail__Id__6225902D">
+          <AssociationSet Name="FK__OrderDetail__Id__74444068" Association="Self.FK__OrderDetail__Id__74444068">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__order__640DD89F" Association="Self.FK__OrderProd__order__640DD89F">
+          <AssociationSet Name="FK__OrderProd__order__7720AD13" Association="Self.FK__OrderProd__order__7720AD13">
             <End Role="OrderDetail" EntitySet="OrderDetail" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__produ__65F62111" Association="Self.FK__OrderProd__produ__65F62111">
+          <AssociationSet Name="FK__OrderProd__produ__7908F585" Association="Self.FK__OrderProd__produ__7908F585">
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__sessi__6501FCD8" Association="Self.FK__OrderProd__sessi__6501FCD8">
+          <AssociationSet Name="FK__OrderProd__sessi__7814D14C" Association="Self.FK__OrderProd__sessi__7814D14C">
             <End Role="Visit" EntitySet="Visit" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__producT__5B78929E" Association="Self.FK__Product__producT__5B78929E">
+          <AssociationSet Name="FK__Product__producT__6D9742D9" Association="Self.FK__Product__producT__6D9742D9">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__supplie__5C6CB6D7" Association="Self.FK__Product__supplie__5C6CB6D7">
+          <AssociationSet Name="FK__Product__supplie__6E8B6712" Association="Self.FK__Product__supplie__6E8B6712">
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -366,7 +356,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             <PropertyRef Name="productType" />
           </Key>
           <Property Name="productType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Product__producT__5B78929E" FromRole="Category" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__producT__6D9742D9" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -378,8 +368,22 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <Property Name="deliveryStatus" Type="Boolean" />
           <Property Name="totalPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__OrderDetail__Id__6225902D" FromRole="OrderDetail" ToRole="AspNetUsers" />
-          <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__order__640DD89F" FromRole="OrderDetail" ToRole="OrderProduct" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__OrderDetail__Id__74444068" FromRole="OrderDetail" ToRole="AspNetUsers" />
+          <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__order__7720AD13" FromRole="OrderDetail" ToRole="OrderProduct" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="sessionID" />
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="sessionID" Type="String" MaxLength="44" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="updatedSession" Type="DateTime" Precision="3" />
+          <Property Name="orderNumber" Type="Int32" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK__OrderProd__order__7720AD13" FromRole="OrderProduct" ToRole="OrderDetail" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__OrderProd__produ__7908F585" FromRole="OrderProduct" ToRole="Product" />
+          <NavigationProperty Name="Visit" Relationship="Self.FK__OrderProd__sessi__7814D14C" FromRole="OrderProduct" ToRole="Visit" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -391,9 +395,9 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="producType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="supplierID" Type="Int32" />
-          <NavigationProperty Name="Category" Relationship="Self.FK__Product__producT__5B78929E" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__produ__65F62111" FromRole="Product" ToRole="OrderProduct" />
-          <NavigationProperty Name="Supplier" Relationship="Self.FK__Product__supplie__5C6CB6D7" FromRole="Product" ToRole="Supplier" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__producT__6D9742D9" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__produ__7908F585" FromRole="Product" ToRole="OrderProduct" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK__Product__supplie__6E8B6712" FromRole="Product" ToRole="Supplier" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -404,7 +408,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <Property Name="supplierAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Product__supplie__5C6CB6D7" FromRole="Supplier" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__supplie__6E8B6712" FromRole="Supplier" ToRole="Product" />
         </EntityType>
         <EntityType Name="Visit">
           <Key>
@@ -412,7 +416,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           </Key>
           <Property Name="sessionID" Type="String" MaxLength="44" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="started" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__sessi__6501FCD8" FromRole="Visit" ToRole="OrderProduct" />
+          <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__sessi__7814D14C" FromRole="Visit" ToRole="OrderProduct" />
         </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -469,7 +473,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDetail__Id__6225902D" FromRole="AspNetUsers" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDetail__Id__74444068" FromRole="AspNetUsers" ToRole="OrderDetail" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
@@ -484,21 +488,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="OrderProduct">
-          <Key>
-            <PropertyRef Name="sessionID" />
-            <PropertyRef Name="productID" />
-          </Key>
-          <Property Name="sessionID" Type="String" MaxLength="44" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="productID" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="updatedSession" Type="DateTime" Precision="3" />
-          <Property Name="orderNumber" Type="Int32" />
-          <NavigationProperty Name="OrderDetail" Relationship="Self.FK__OrderProd__order__640DD89F" FromRole="OrderProduct" ToRole="OrderDetail" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__OrderProd__produ__65F62111" FromRole="OrderProduct" ToRole="Product" />
-          <NavigationProperty Name="Visit" Relationship="Self.FK__OrderProd__sessi__6501FCD8" FromRole="OrderProduct" ToRole="Visit" />
-        </EntityType>
-        <Association Name="FK__Product__producT__5B78929E">
+        <Association Name="FK__Product__producT__6D9742D9">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -510,7 +500,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDetail__Id__6225902D">
+        <Association Name="FK__OrderDetail__Id__74444068">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -522,7 +512,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__order__640DD89F">
+        <Association Name="FK__OrderProd__order__7720AD13">
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -534,7 +524,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__produ__65F62111">
+        <Association Name="FK__OrderProd__produ__7908F585">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -546,19 +536,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__supplie__5C6CB6D7">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="supplierID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="supplierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__OrderProd__sessi__6501FCD8">
+        <Association Name="FK__OrderProd__sessi__7814D14C">
           <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
           <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
           <ReferentialConstraint>
@@ -567,6 +545,18 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
             </Principal>
             <Dependent Role="OrderProduct">
               <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__supplie__6E8B6712">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="supplierID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="supplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -605,6 +595,7 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
         <EntityContainer Name="mergedEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="Visits" EntityType="Self.Visit" />
@@ -614,30 +605,29 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
-          <AssociationSet Name="FK__Product__producT__5B78929E" Association="Self.FK__Product__producT__5B78929E">
+          <AssociationSet Name="FK__Product__producT__6D9742D9" Association="Self.FK__Product__producT__6D9742D9">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDetail__Id__6225902D" Association="Self.FK__OrderDetail__Id__6225902D">
+          <AssociationSet Name="FK__OrderDetail__Id__74444068" Association="Self.FK__OrderDetail__Id__74444068">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__order__640DD89F" Association="Self.FK__OrderProd__order__640DD89F">
+          <AssociationSet Name="FK__OrderProd__order__7720AD13" Association="Self.FK__OrderProd__order__7720AD13">
             <End Role="OrderDetail" EntitySet="OrderDetails" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__produ__65F62111" Association="Self.FK__OrderProd__produ__65F62111">
+          <AssociationSet Name="FK__OrderProd__produ__7908F585" Association="Self.FK__OrderProd__produ__7908F585">
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__supplie__5C6CB6D7" Association="Self.FK__Product__supplie__5C6CB6D7">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__sessi__6501FCD8" Association="Self.FK__OrderProd__sessi__6501FCD8">
+          <AssociationSet Name="FK__OrderProd__sessi__7814D14C" Association="Self.FK__OrderProd__sessi__7814D14C">
             <End Role="Visit" EntitySet="Visits" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__supplie__6E8B6712" Association="Self.FK__Product__supplie__6E8B6712">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -715,6 +705,17 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
                 <ScalarProperty Name="deliveryStatus" ColumnName="deliveryStatus" />
                 <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts">
+            <EntityTypeMapping TypeName="hoursMergedModel.OrderProduct">
+              <MappingFragment StoreEntitySet="OrderProduct">
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="updatedSession" ColumnName="updatedSession" />
+                <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -812,17 +813,6 @@ warning 6002: The table/view '2hoursMerged.2hours.OrderProduct' does not have a 
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderProducts">
-            <EntityTypeMapping TypeName="hoursMergedModel.OrderProduct">
-              <MappingFragment StoreEntitySet="OrderProduct">
-                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
-                <ScalarProperty Name="productID" ColumnName="productID" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="updatedSession" ColumnName="updatedSession" />
-                <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
