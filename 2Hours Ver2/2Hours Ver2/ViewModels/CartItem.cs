@@ -27,5 +27,6 @@ namespace _2Hours_Ver2.ViewModels
         public CartItem()
         {
         }
-    }
+
+    }//end CartItem
 }

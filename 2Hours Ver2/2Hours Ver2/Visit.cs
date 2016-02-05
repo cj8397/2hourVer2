@@ -17,13 +17,13 @@ namespace _2Hours_Ver2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Visit()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.OrderProducts = new HashSet<OrderProduct>();
         }
     
         public string sessionID { get; set; }
         public Nullable<System.DateTime> started { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

@@ -14,6 +14,12 @@ namespace _2Hours_Ver2
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.OrderProducts = new HashSet<OrderProduct>();
+        }
+    
         public int productID { get; set; }
         public string productName { get; set; }
         public string unit { get; set; }
@@ -22,6 +28,8 @@ namespace _2Hours_Ver2
         public Nullable<int> supplierID { get; set; }
     
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         public virtual Supplier Supplier { get; set; }
     }
 }

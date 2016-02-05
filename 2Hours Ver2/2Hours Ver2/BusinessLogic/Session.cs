@@ -95,16 +95,16 @@ namespace shoppingCart.BusinessLogic
         //remove all items from cart
         public void RemoveItems(string sessionID)
         {
-            var orderDetails = db.OrderDetails
+            var orderProducts = db.OrderProducts
                 .Where(v => v.sessionID == sessionID);
-            RemoveProductVisits(orderDetails.ToList());
+            RemoveOrderProducts(orderProducts.ToList());
         }
 
-        public void RemoveProductVisits(List<OrderDetail> productVisits)
+        public void RemoveOrderProducts(List<OrderProduct> orderProducts)
         {
-            if (productVisits.Any())
+            if (orderProducts.Any())
             {
-                productVisits.ForEach(pv => db.OrderDetails.Remove(pv));
+                orderProducts.ForEach(op => db.OrderProducts.Remove(op));
                 db.SaveChanges();
             }
         }
@@ -119,7 +119,7 @@ namespace shoppingCart.BusinessLogic
                     var visitExp = db.Visits.FirstOrDefault(v => v.started == item);
                     if (visitExp != null)
                     {
-                        bool isUpdated = db.OrderDetails
+                        bool isUpdated = db.OrderProducts
                             .Where(x => x.sessionID == visitExp.sessionID && End < x.updatedSession)
                             .Any();
                         if (!isUpdated)
@@ -137,9 +137,9 @@ namespace shoppingCart.BusinessLogic
         {
             if (SessionID != null)
             {
-                var expSession = db.OrderDetails.Where(e => End > e.updatedSession);
+                var expSession = db.OrderProducts.Where(e => End > e.updatedSession);
 
-                RemoveProductVisits(expSession.ToList());
+                RemoveOrderProducts(expSession.ToList());
 
                 var lapsedSessions = db.Visits
                     .Where(x => End > x.started)

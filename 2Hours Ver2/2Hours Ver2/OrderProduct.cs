@@ -12,12 +12,16 @@ namespace _2Hours_Ver2
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class OrderProduct
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string sessionID { get; set; }
+        public int productID { get; set; }
+        public Nullable<decimal> quantity { get; set; }
+        public Nullable<System.DateTime> updatedSession { get; set; }
+        public Nullable<int> orderNumber { get; set; }
+    
+        public virtual OrderDetail OrderDetail { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Visit Visit { get; set; }
     }
 }

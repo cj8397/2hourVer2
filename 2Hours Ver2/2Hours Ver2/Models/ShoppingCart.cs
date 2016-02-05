@@ -6,7 +6,7 @@ using System.Web;
 
 namespace _2Hours_Ver2.Models
 {
-    public class ShoppingCart
+    public class ShoppingCart: IDisposable
     {
         public const decimal TAX_RATE = 0.07m;
         private mergedEntities db = new mergedEntities();
@@ -15,34 +15,32 @@ namespace _2Hours_Ver2.Models
         public IQueryable<CartItem> GetAllItems(string sessionID)
         {
             var products = (from p in db.Products
-                            from od in p.OrderDetails
-                            where od.sessionID == sessionID && od.productID == p.productID
+                            from op in p.OrderProducts
+                            where op.sessionID == sessionID && op.productID == p.productID
                             select new CartItem
                             {
                                 ProductID = p.productID,
                                 ProductName = p.productName,
                                 Price = (decimal)p.price,
-                                Quantity = (int)od.qtyOrdered,
-                                SessionID = od.sessionID
-
+                                Quantity = (int)op.quantity,
+                                SessionID = op.sessionID
                             });
             return products;
         }
 
         public CartItem GetItem(int productID, string sessionID)
         {
-            var product = GetAllItems(sessionID)
-                          .Where(pv => pv.SessionID == sessionID && pv.ProductID == productID)
-                          .Select(pv => new CartItem
+            var item = GetAllItems(sessionID)
+                          .Where(op => op.ProductID == productID)
+                          .Select(op => new CartItem
                           {
-                              ProductID = pv.ProductID,
-                              ProductName = pv.ProductName,
-                              Price = pv.Price,
-                              Quantity = pv.Quantity,
-                              SessionID = pv.SessionID
+                              ProductID = op.ProductID,
+                              ProductName = op.ProductName,
+                              Price = op.Price,
+                              Quantity = op.Quantity
 
                           }).FirstOrDefault();
-            return product;
+            return item;
         }
 
         public CartItem NewCartItem(int productID, string sessionID, int? quantity = null)
@@ -53,18 +51,18 @@ namespace _2Hours_Ver2.Models
 
         public void StoreItem(int productID, int? qty, string sessionID)
         {
-            var item = new OrderDetail();
+            var item = new OrderProduct();
             item.sessionID = sessionID;
-            item.qtyOrdered = qty;
+            item.quantity = qty;
             item.productID = productID;
-            item.updated = DateTime.Now;
+            item.updatedSession = DateTime.Now;
 
             if (db.Visits.Any(s => s.sessionID == sessionID))
             {
                 isValidItem(sessionID, productID);
             }
 
-            db.OrderDetails.Add(item);
+            db.OrderProducts.Add(item);
             db.SaveChanges();
 
         }
@@ -89,8 +87,8 @@ namespace _2Hours_Ver2.Models
 
         public void RemoveItem(int productID, string sessionID)
         {
-            var selected = db.OrderProduct.Single(p => p.sessionID == sessionID && p.productID == productID);
-            db.OrderDetails.Remove(selected);
+            var selected = db.OrderProducts.Single(p => p.sessionID == sessionID && p.productID == productID);
+            db.OrderProducts.Remove(selected);
             db.SaveChanges();
         }
 
@@ -98,12 +96,18 @@ namespace _2Hours_Ver2.Models
         private bool isValidItem(string sessionID, int productID)
         {
             //check for duplicate sessions and products
-            if (db.OrderDetails.Any(s => s.sessionID == sessionID && s.productID == productID))
+            if (db.OrderProducts.Any(s => s.sessionID == sessionID && s.productID == productID))
             {
                 RemoveItem(productID, sessionID);
                 return true;
             }
             return false;
         }
-    }
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
+
+    }//end ShoppingCart
 }
