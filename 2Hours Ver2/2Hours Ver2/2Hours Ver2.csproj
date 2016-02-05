@@ -296,6 +296,8 @@
     <Content Include="Views\Home\_Profile.cshtml" />
     <Content Include="Views\Home\_User.cshtml" />
     <Content Include="Views\Home\ConfirmEmail.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

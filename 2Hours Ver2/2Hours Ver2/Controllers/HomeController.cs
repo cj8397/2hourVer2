@@ -265,8 +265,8 @@ namespace _2Hours_Ver2.Controllers
         {
             return View();
         }
-
-        [Authorize]
+        [HttpGet]
+     //   [Authorize]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -347,12 +347,52 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }
 
+        //[HttpGet]
+        //public ActionResult ForgotPassword()
+        //{
+        //    return View();
+        //}
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            var user = manager.FindByEmail(email);
+            CreateTokenProvider(manager, PASSWORD_RESET);
 
+            var code = manager.GeneratePasswordResetToken(user.Id);
+            var callbackUrl = Url.Action("ResetPassword", "Home",
+                                         new { userId = user.Id, code = code },
+                                         protocol: Request.Url.Scheme);
+            ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
+                                     + callbackUrl + "\">here</a>";
+            return View();
+        }
 
+        [HttpGet]
+        public ActionResult ResetPassword(string userID, string code)
+        {
+            ViewBag.PasswordToken = code;
+            ViewBag.UserID = userID;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(string password, string passwordConfirm,
+                                          string passwordToken, string userID)
+        {
 
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            var user = manager.FindById(userID);
+            CreateTokenProvider(manager, PASSWORD_RESET);
 
-
-
+            IdentityResult result = manager.ResetPassword(userID, passwordToken, password);
+            if (result.Succeeded)
+                ViewBag.Result = "The password has been reset.";
+            else
+                ViewBag.Result = "The password has not been reset.";
+            return View();
+        }
 
     }
 }
