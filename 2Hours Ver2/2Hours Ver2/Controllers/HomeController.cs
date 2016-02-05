@@ -89,6 +89,7 @@ namespace _2Hours_Ver2.Controllers
                                            DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties() { },
                                              userIdentity);
+                return RedirectToAction("_User", "Home");
             }
             return View();
         }

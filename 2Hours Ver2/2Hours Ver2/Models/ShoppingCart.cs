@@ -52,8 +52,6 @@ namespace _2Hours_Ver2.Models
 
         public void AddItem(int productID, int? qty, string sessionID)
         {
-            try
-            {
                 var item = new OrderProduct();
                 item.sessionID = sessionID;
                 item.quantity = qty;
@@ -67,12 +65,6 @@ namespace _2Hours_Ver2.Models
 
                 db.OrderProducts.Add(item);
                 db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine(e.Message);
-            }
 
         }
 

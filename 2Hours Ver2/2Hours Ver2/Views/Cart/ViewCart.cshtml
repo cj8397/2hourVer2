@@ -11,7 +11,7 @@
     </div>
 }
 else {
-    using (Html.BeginForm("ViewCart", "Home", FormMethod.Post, new { name = "viewCart", novalidate = "novalidate" }))
+    using (Html.BeginForm("ViewCart", "Cart", FormMethod.Post, new { name = "viewCart", novalidate = "novalidate" }))
     {
         <div class="col-sm-12 col-sx-12">
             <table class="table">
@@ -43,7 +43,7 @@ else {
                 {
                     <tr>
                         <td>
-                            <img src="~/Content/img/img[@item.ProductID].jpg" width="200" height="200" />
+                            <img src="~/Content/imgs/img[@item.ProductID].jpg" width="200" height="200" />
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ProductID)
