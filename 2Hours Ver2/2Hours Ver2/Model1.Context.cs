@@ -29,9 +29,9 @@ namespace _2Hours_Ver2
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<Visit> Visits { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }

@@ -17,12 +17,7 @@ namespace _2Hours_Ver2.Controllers
 {
     public class HomeController : Controller
     {
-
-        
-        private const int DEFAULT_QTY = 1;
         private mergedEntities db = new mergedEntities();
-        private ShoppingCart shoppingCart = new ShoppingCart();
-        private Session session = new Session();
 
         // GET: Home
         public ActionResult Index()
@@ -94,6 +89,7 @@ namespace _2Hours_Ver2.Controllers
                                            DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties() { },
                                              userIdentity);
+                return RedirectToAction("_User", "Home");
             }
             return View();
         }
@@ -110,7 +106,7 @@ namespace _2Hours_Ver2.Controllers
             authenticationManager.SignOut();
             return RedirectToAction("Login", "Home");
         }
-        /*
+        
         [HttpGet]
         public ActionResult AddRole()
         {
@@ -119,9 +115,8 @@ namespace _2Hours_Ver2.Controllers
         [HttpPost]
         public ActionResult AddRole(AspNetRole role)
         {
-            hoursLoginEntities context = new hoursLoginEntities();
-            context.AspNetRoles.Add(role);
-            context.SaveChanges();
+            db.AspNetRoles.Add(role);
+            db.SaveChanges();
             return View();
         }
 
@@ -133,14 +128,13 @@ namespace _2Hours_Ver2.Controllers
         [HttpPost]
         public ActionResult AddUserToRole(string userName, string roleName)
         {
-            hoursLoginEntities context = new hoursLoginEntities();
-            AspNetUser user = context.AspNetUsers
+            AspNetUser user = db.AspNetUsers
                              .Where(u => u.UserName == userName).FirstOrDefault();
-            AspNetRole role = context.AspNetRoles
+            AspNetRole role = db.AspNetRoles
                              .Where(r => r.Name == roleName).FirstOrDefault();
 
             user.AspNetRoles.Add(role);
-            context.SaveChanges();
+            db.SaveChanges();
             return View();
         }
 
@@ -271,58 +265,9 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult PasswordReset()
         {
             return View();
-        }*/
-
-
-        public ActionResult Add(int productID)
-        {
-            var item = shoppingCart.GetItem(productID, session.SessionID);
-            if (item == null)
-            {
-                item = shoppingCart.NewCartItem(productID, session.SessionID, DEFAULT_QTY);
-            }
-            else {
-                //default quantity to one
-                item.Quantity = item.Quantity ?? DEFAULT_QTY;
-                //shoppingCart.UpdateCartItem(item);
-            }
-
-            return View(item);
-        }
-        [HttpPost]
-        public ActionResult Add(CartItem item)
-        {
-            using (var shoppingCart = new ShoppingCart())
-            {
-                if (ModelState.IsValid)
-                {
-                    string sessionId = session.SessionID;
-                    shoppingCart.StoreItem(item.ProductID, item.Quantity, sessionId);
-                    return RedirectToAction("ViewCart");
-                }
-                return View("Add");
-            }
         }
 
-        public ActionResult ViewCart()
-        {
-            var items = shoppingCart.GetAllItems(session.SessionID);
 
-            if (items.Any())
-            {
-                Session["shoppingCart"] = items.Count();
-            }
-            else
-            {
-                Session["shoppingCart"] = null;
-            }
-            var order = new Order
-            {
-                CartItems = items,
-                Tax = ShoppingCart.TAX_RATE
-            };
 
-            return View(order);
-        }
-    }
+    }//end home controller
 }

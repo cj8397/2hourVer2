@@ -12,18 +12,16 @@ namespace _2Hours_Ver2
     using System;
     using System.Collections.Generic;
     
-    public partial class Visit
+    public partial class OrderProduct
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Visit()
-        {
-            this.OrderProducts = new HashSet<OrderProduct>();
-        }
-    
         public string sessionID { get; set; }
-        public Nullable<System.DateTime> started { get; set; }
+        public int productID { get; set; }
+        public Nullable<decimal> quantity { get; set; }
+        public Nullable<System.DateTime> updatedSession { get; set; }
+        public Nullable<int> orderNumber { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual OrderDetail OrderDetail { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Visit Visit { get; set; }
     }
 }

@@ -14,16 +14,21 @@ namespace _2Hours_Ver2
     
     public partial class OrderDetail
     {
-        public string sessionID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OrderDetail()
+        {
+            this.OrderProducts = new HashSet<OrderProduct>();
+        }
+    
         public int orderNumber { get; set; }
         public Nullable<System.DateTime> orderDate { get; set; }
         public Nullable<System.DateTime> deliveryTime { get; set; }
         public Nullable<bool> deliveryStatus { get; set; }
-        public Nullable<System.DateTime> updatedSession { get; set; }
         public Nullable<decimal> totalPrice { get; set; }
-        public Nullable<int> userId { get; set; }
+        public string Id { get; set; }
     
-        public virtual Visit Visit { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace _2Hours_Ver2.Models
 {
-    public class ShoppingCart
+    public class ShoppingCart: IDisposable
     {
         public const decimal TAX_RATE = 0.07m;
         private mergedEntities db = new mergedEntities();
@@ -15,57 +15,56 @@ namespace _2Hours_Ver2.Models
         public IQueryable<CartItem> GetAllItems(string sessionID)
         {
             var products = (from p in db.Products
-                            from od in p.OrderDetails
-                            where od.sessionID == sessionID && od.productID == p.productID
+                            from op in p.OrderProducts
+                            where op.sessionID == sessionID && op.productID == p.productID
                             select new CartItem
                             {
                                 ProductID = p.productID,
                                 ProductName = p.productName,
                                 Price = (decimal)p.price,
-                                Quantity = (int)od.qtyOrdered,
-                                SessionID = od.sessionID
-
+                                Quantity = (int)op.quantity,
+                                SessionID = op.sessionID
                             });
             return products;
         }
 
         public CartItem GetItem(int productID, string sessionID)
         {
-            var product = GetAllItems(sessionID)
-                          .Where(pv => pv.SessionID == sessionID && pv.ProductID == productID)
-                          .Select(pv => new CartItem
+            var item = GetAllItems(sessionID)
+                          .Where(op => op.SessionID == sessionID && op.ProductID == productID)
+                          .Select(op => new CartItem
                           {
-                              ProductID = pv.ProductID,
-                              ProductName = pv.ProductName,
-                              Price = pv.Price,
-                              Quantity = pv.Quantity,
-                              SessionID = pv.SessionID
+                              ProductID  = op.ProductID,
+                              ProductName = op.ProductName,
+                              Price       = op.Price,
+                              Quantity    = op.Quantity,
+                              SessionID   = op.SessionID
 
                           }).FirstOrDefault();
-            return product;
+            return item;
         }
 
         public CartItem NewCartItem(int productID, string sessionID, int? quantity = null)
         {
-            StoreItem(productID, quantity, sessionID);
+            AddItem(productID, quantity, sessionID);
             return GetItem(productID, sessionID);
         }
 
-        public void StoreItem(int productID, int? qty, string sessionID)
+        public void AddItem(int productID, int? qty, string sessionID)
         {
-            var item = new OrderDetail();
-            item.sessionID = sessionID;
-            item.qtyOrdered = qty;
-            item.productID = productID;
-            item.updated = DateTime.Now;
+                var item = new OrderProduct();
+                item.sessionID = sessionID;
+                item.quantity = qty;
+                item.productID = productID;
+                item.updatedSession = DateTime.Now;
 
-            if (db.Visits.Any(s => s.sessionID == sessionID))
-            {
-                isValidItem(sessionID, productID);
-            }
+                if (db.Visits.Any(v => v.sessionID == sessionID))
+                {
+                    isValidItem(sessionID, productID);
+                }
 
-            db.OrderDetails.Add(item);
-            db.SaveChanges();
+                db.OrderProducts.Add(item);
+                db.SaveChanges();
 
         }
 
@@ -77,7 +76,7 @@ namespace _2Hours_Ver2.Models
                 {
                     if (isValidItem(sessionID, item.ProductID))
                     {
-                        StoreItem(item.ProductID, item.Quantity, sessionID);
+                        AddItem(item.ProductID, item.Quantity, sessionID);
                     }
                 }
 
@@ -89,8 +88,8 @@ namespace _2Hours_Ver2.Models
 
         public void RemoveItem(int productID, string sessionID)
         {
-            var selected = db.OrderProduct.Single(p => p.sessionID == sessionID && p.productID == productID);
-            db.OrderDetails.Remove(selected);
+            var selected = db.OrderProducts.Single(p => p.sessionID == sessionID && p.productID == productID);
+            db.OrderProducts.Remove(selected);
             db.SaveChanges();
         }
 
@@ -98,12 +97,18 @@ namespace _2Hours_Ver2.Models
         private bool isValidItem(string sessionID, int productID)
         {
             //check for duplicate sessions and products
-            if (db.OrderDetails.Any(s => s.sessionID == sessionID && s.productID == productID))
+            if (db.OrderProducts.Any(s => s.sessionID == sessionID && s.productID == productID))
             {
                 RemoveItem(productID, sessionID);
                 return true;
             }
             return false;
         }
-    }
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
+
+    }//end ShoppingCart
 }
