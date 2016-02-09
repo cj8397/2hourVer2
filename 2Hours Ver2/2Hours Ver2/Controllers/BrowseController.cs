@@ -12,9 +12,11 @@ namespace _2Hours_Ver2.Controllers
         // GET: Browse
         public ActionResult Index()
         {
-            ProductsRepo products = new ProductsRepo();
+            mergedEntities db = new mergedEntities();
+            var products = db.Products.ToList();
+            //ProductsRepo products = new ProductsRepo();
 
-            return View(products.GetAll());
+            return View(products);
         }
     }
 }

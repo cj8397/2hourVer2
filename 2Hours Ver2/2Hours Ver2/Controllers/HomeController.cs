@@ -273,7 +273,7 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }*/
 
-
+        /*
         public ActionResult Add(int productID)
         {
             var item = shoppingCart.GetItem(productID, session.SessionID);
@@ -323,6 +323,6 @@ namespace _2Hours_Ver2.Controllers
             };
 
             return View(order);
-        }
+        }*/
     }
 }

@@ -11,7 +11,7 @@ namespace _2Hours_Ver2.Models
         public const decimal TAX_RATE = 0.07m;
         private mergedEntities db = new mergedEntities();
 
-
+        /*
         public IQueryable<CartItem> GetAllItems(string sessionID)
         {
             var products = (from p in db.Products
@@ -104,6 +104,6 @@ namespace _2Hours_Ver2.Models
                 return true;
             }
             return false;
-        }
+        }*/
     }
 }
