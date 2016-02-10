@@ -53,122 +53,102 @@
 <h2>SQL Script</h2>
 	<textarea name="SQL" rows="100" cols="100">
 		
-		IF OBJECT_ID('OrderProduct')
-		IS NOT NULL DROP TABLE OrderProduct;
-	IF OBJECT_ID('OrderDetail')
-		IS NOT NULL DROP TABLE OrderDetail;
-		IF OBJECT_ID('Visit')
-		IS NOT NULL DROP TABLE Visit;
-	IF OBJECT_ID('Product')
-		IS NOT NULL DROP TABLE Product;
-	IF OBJECT_ID('UserProfile')
-		IS NOT NULL DROP TABLE UserProfile;
-	IF OBJECT_ID('Supplier')
-		IS NOT NULL DROP TABLE Supplier;
-	IF OBJECT_ID('Category')
-		IS NOT NULL DROP TABLE Category;
+        IF OBJECT_ID('OrderProduct')
+        IS NOT NULL DROP TABLE OrderProduct;
+        IF OBJECT_ID('OrderDetail')
+        IS NOT NULL DROP TABLE OrderDetail;
+        IF OBJECT_ID('Visit')
+        IS NOT NULL DROP TABLE Visit;
+        IF OBJECT_ID('Product')
+        IS NOT NULL DROP TABLE Product;
+        IF OBJECT_ID('Supplier')
+        IS NOT NULL DROP TABLE Supplier;
+        IF OBJECT_ID('Category')
+        IS NOT NULL DROP TABLE Category;
+
+        CREATE TABLE Category (
+        productType VARCHAR(20)PRIMARY KEY,
+        );
+        GO
+
+        INSERT INTO Category VALUES('Vegetable');
+        INSERT INTO Category VALUES('Meat');
+        INSERT INTO Category VALUES('Fruit');
+        GO
+
+        CREATE TABLE Supplier (
+        supplierID INT IDENTITY(10000, 1) PRIMARY KEY,
+        supplierName VARCHAR(50),
+        supplierAddress VARCHAR(100),
+        email VARCHAR(100),
+        phone VARCHAR(20),
+        );
+        GO
+
+        INSERT INTO Supplier VALUES('Safeway', '111 one st, Toronto', 'one@safeway.net', '905-222-1111');
+        INSERT INTO Supplier VALUES('Walmart', '222 two st, PoCo', 'two@walmart.net', '604-222-1111');
+        INSERT INTO Supplier VALUES('Superstore', '333 three st, Vancouver', 'three@superstore.net', '778-222-1111');
+        GO
+
+        CREATE TABLE Product (
+        productID INT NOT NULL PRIMARY KEY,
+        productName VARCHAR(20),
+        unit VARCHAR(5),
+        price MONEY CHECK(price > 0),
+        producType VARCHAR(20) FOREIGN KEY REFERENCES Category(productType),
+        supplierID INT FOREIGN KEY REFERENCES Supplier(supplierID),
+        );
+        GO
+
+        INSERT INTO Product VALUES(1, 'Tomato', 'lb', 1, 'Vegetable', 10000);
+        INSERT INTO Product VALUES(2, 'Short Ribs', 'lb', 6, 'Meat', 10001);
+        INSERT INTO Product VALUES(3, 'Grapes', 'pc', 2, 'Fruit', 10002);
+        GO
+
+        CREATE TABLE Visit (
+        sessionID VARCHAR(44) PRIMARY KEY,
+        started DATETIME
+        );
+        GO
+
+        INSERT INTO Visit VALUES('aaa111', '2015-1-1 12:00');
+        INSERT INTO Visit VALUES('bbb222', '2015-1-1 12:00');
+        INSERT INTO Visit VALUES('ccc333', '2015-1-1 12:00');
+
+        CREATE TABLE OrderDetail (
+        orderNumber INT IDENTITY(1000, 1),
+        orderDate DATETIME,
+        deliveryTime DATETIME,
+        deliveryStatus BIT,
+        totalPrice MONEY CHECK( totalPrice > 0),
+        PRIMARY KEY (orderNumber),
+        Id NVARCHAR(128) FOREIGN KEY REFERENCES AspNetUsers(Id),
+        );
+        GO
+
+        INSERT INTO OrderDetail VALUES ('2015-1-1 12:00', '2015-1-2 12:00',  0, 24.5, '9378f7c9-ddaf-466d-b4d2-d89eec1244ce');
+        INSERT INTO OrderDetail VALUES ('2015-12-1 12:00', '2015-1-3 12:00',  1, 95, '9378f7c9-ddaf-466d-b4d2-d89eec1244ce');
+        INSERT INTO OrderDetail VALUES ('2015-3-1 12:00', '2015-4-4 12:00',  0, 48.4, '9378f7c9-ddaf-466d-b4d2-d89eec1244ce');
 
 
+        CREATE TABLE OrderProduct (
+        sessionID VARCHAR(44) NOT NULL,
+        productID INT NOT NULL,
+        quantity DECIMAL,
+        updatedSession DATETIME,
+        PRIMARY KEY (sessionID, productID),
+        orderNumber INT FOREIGN KEY REFERENCES OrderDetail(orderNumber),
+        FOREIGN KEY (sessionID) REFERENCES Visit(sessionID),
+        FOREIGN KEY (productID) REFERENCES Product(productID),
+        );
+        GO
 
-	CREATE TABLE Category (
-		productType VARCHAR(20)PRIMARY KEY,
-		);
-	GO
-
-	INSERT INTO Category VALUES('Vegetable');
-	INSERT INTO Category VALUES('Meat');
-	INSERT INTO Category VALUES('Fruit');
-	GO
-
-	CREATE TABLE Supplier (
-		supplierID INT IDENTITY(10000, 1) PRIMARY KEY,
-		supplierName VARCHAR(50),
-		supplierAddress VARCHAR(100),
-		email VARCHAR(100),
-		phone VARCHAR(20),
-		);
-	GO
-
-	INSERT INTO Supplier VALUES('Safeway', '111 one st, Toronto', 'one@safeway.net', '905-222-1111');
-	INSERT INTO Supplier VALUES('Walmart', '222 two st, PoCo', 'two@walmart.net', '604-222-1111');
-	INSERT INTO Supplier VALUES('Superstore', '333 three st, Vancouver', 'three@superstore.net', '778-222-1111');
-	GO
-
-	CREATE TABLE UserProfile (
-		userID INT PRIMARY KEY,
-		firstName VARCHAR(30),
-		lastName VARCHAR(30),
-		dateOfBirth DATE,
-		userName VARCHAR(50),
-		userPassWord VARCHAR(100),
-		userAddress VARCHAR(100),
-		email VARCHAR(100),
-		phone FLOAT,
-		);
-	GO
-
-	INSERT INTO UserProfile VALUES(1, 'cheng', 'c', '2000-1-1', 'cheng', 'hello', '879 Seymour Street', 'customerservice@superstore.com', 60493288484);
-	INSERT INTO UserProfile VALUES(2, 'farideh', 'f', '2015-12-14', 'hassan', 'welcome', '879 Seymour Street', 'customerservice@superstore.com', 604869621);
-	INSERT INTO UserProfile VALUES(3, 'rosalia', 'm', '2023-06-19', 'rosalia', 'coffee', '879 Seymour Street', 'customerservice@superstore.com', 604869621);
-	GO
-
-	CREATE TABLE Product (
-		productID INT PRIMARY KEY,
-		productName VARCHAR(20),
-		unit VARCHAR(5),
-		price MONEY CHECK(price > 0),
-		producType VARCHAR(20) FOREIGN KEY REFERENCES Category(productType),
-		supplierID INT FOREIGN KEY REFERENCES Supplier(supplierID),
-		);
-	GO
-
-	INSERT INTO Product VALUES(1, 'Tomato', 'lb', 1, 'Vegetable', 10000);
-	INSERT INTO Product VALUES(2, 'Short Ribs', 'lb', 6, 'Meat', 10001);
-	INSERT INTO Product VALUES(3, 'Grapes', 'pc', 2, 'Fruit', 10002);
-	GO
-
-	CREATE TABLE Visit (
-		sessionID VARCHAR(44) PRIMARY KEY,
-		started DATETIME
-	);
-	GO
-
-	INSERT INTO Visit VALUES('aaa111', '2015-1-1 12:00');
-	INSERT INTO Visit VALUES('bbb222', '2015-1-1 12:00');
-	INSERT INTO Visit VALUES('ccc333', '2015-1-1 12:00');
-
-	CREATE TABLE OrderDetail (
-		sessionID VARCHAR(44),
-		orderNumber INT IDENTITY(1000, 1),
-		orderDate DATETIME,
-		deliveryTime DATETIME,
-		deliveryStatus BIT,
-		updatedSession DATETIME,
-		totalPrice MONEY CHECK( totalPrice > 0),
-		PRIMARY KEY (orderNumber),
-		userID INT FOREIGN KEY REFERENCES UserProfile(userID),
-		FOREIGN KEY (sessionID) REFERENCES Visit(sessionID),
-		);
-	GO
-
-	INSERT INTO OrderDetail VALUES ('aaa111', '2015-1-1 12:00', '2015-1-2 12:00',  0, '2015-1-1 12:00', 24.5, 1);
-	INSERT INTO OrderDetail VALUES ('bbb222', '2015-12-1 12:00', '2015-1-3 12:00',  1, '2015-12-1 12:00', 95, 2);
-	INSERT INTO OrderDetail VALUES ('ccc333', '2015-3-1 12:00', '2015-4-4 12:00',  0, '2015-3-1 12:00', 48.4, 3);
-
-
-	CREATE TABLE OrderProduct (
-		quantity DECIMAL,
-		productID INT FOREIGN KEY REFERENCES Product(productID),
-		orderNumber INT FOREIGN KEY REFERENCES OrderDetail(orderNumber),
-	);
-	GO
-
-	INSERT INTO OrderProduct VALUES (20, 1, 1000);
-	INSERT INTO OrderProduct VALUES (8, 2, 1001);
-	INSERT INTO OrderProduct VALUES (19, 3, 1002);
-	GO
+        INSERT INTO OrderProduct VALUES ('aaa111', 1, 20, '2015-1-2 12:00', 1000);
+        INSERT INTO OrderProduct VALUES ('bbb222', 2, 8, '2015-1-2 12:00', 1001);
+        INSERT INTO OrderProduct VALUES ('ccc333', 3, 19,'2015-1-2 12:00', 1002);
+        GO
 	</textarea>
 <h2>ERD Diagram</h2>
-<img src="./Images/UpatedERD.PNG" width="1200" height="860">
+    <img src="Images/UpdatedERD2.JPG" width="1200" height="860">
 </body>
 </html>
