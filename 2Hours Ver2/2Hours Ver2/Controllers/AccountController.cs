@@ -52,7 +52,7 @@ namespace _2Hours_Ver2.Controllers
                     {
                         IsPersistent = false
                     }, identity);
-                    return RedirectToAction("SecureArea", "Home");
+                    return RedirectToAction("UserArea", "Account");
                 }
             }
             return View();
@@ -81,7 +81,7 @@ namespace _2Hours_Ver2.Controllers
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
-                var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                var callbackUrl = Url.Action("ConfirmEmail", "Home",
                                                 new { userId = identityUser.Id, code = code },
                                                     protocol: Request.Url.Scheme);
 
@@ -102,7 +102,7 @@ namespace _2Hours_Ver2.Controllers
                 // sending Email End
             }
             return View();
-        }
+            }
         [Authorize]
         public ActionResult Welcome(string name) {
             //ViewBag.UserName = name;
@@ -114,7 +114,7 @@ namespace _2Hours_Ver2.Controllers
             var ctx = Request.GetOwinContext();
             var authenticationManager = ctx.Authentication;
             authenticationManager.SignOut();
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
@@ -358,7 +358,7 @@ namespace _2Hours_Ver2.Controllers
             CreateTokenProvider(manager, PASSWORD_RESET);
 
             var code = manager.GeneratePasswordResetToken(user.Id);
-            var callbackUrl = Url.Action("ResetPassword", "Home",
+            var callbackUrl = Url.Action("ResetPassword", "Account",
                                          new { userId = user.Id, code = code },
                                          protocol: Request.Url.Scheme);
             ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
