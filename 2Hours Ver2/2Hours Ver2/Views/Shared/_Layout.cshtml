@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - 2hours.com</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="~/Style/styles.css">
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -25,67 +24,58 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About Us", "AboutUs", "Home")</li>
                     <li>@Html.ActionLink("FAQ", "FAQ", "Home")</li>
-                    <li class="browse">
-                        @Html.ActionLink("Shop Now", "ShopProducts", "Home")
-                    <div class="submenu">
-                        <ul>
-                            <li><a href="#">Vegetables</a></li>
-                            <li>Meats</li>
-                            <li>Fruit</li>
-                        </ul>
-                    </div>
-                </li>
-                <li>@Html.ActionLink("Contact Us", "ContactUs", "Home")</li>
-                @{
-                    if(Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("User Area", "UserArea", "Account")</li>
+                    <li>@Html.ActionLink("Shop Now", "ShopProducts", "Home")</li>
+                    <li>@Html.ActionLink("Contact Us", "ContactUs", "Home")</li>
+    @{
+        if (Request.IsAuthenticated)
+        {
+                            <li>@Html.ActionLink("User Area", "UserArea", "Account")</li>
 
-                        if((User.IsInRole("Admin")))
-                        {
-                            <li>@Html.ActionLink("Administrators", "AdminOnly", "Account")</li>
+                            if ((User.IsInRole("Admin")))
+                            {
+                                <li>@Html.ActionLink("Administrators", "AdminOnly", "Account")</li>
                                 <li>@Html.ActionLink("Orders", "AdminOrders", "Account")</li>
                                 <li>@Html.ActionLink("Products", "AdminProducts", "Account")</li>
                                 <li>@Html.ActionLink("Suppliers", "AdminSuppliers", "Account")</li>
                                 <li>@Html.ActionLink("Users", "AdminViewUsers", "Account")</li>
-                        }
 
-                        <li><span class="label label-info">@Html.Raw(User.Identity.Name)</span></li>
+            }
+
+                            <li><span class="label label-info">@Html.Raw(User.Identity.Name)</span></li>
                             <li><a href="@Url.Action("Logout", "Account")"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                    }
-                    else
-                    {
-                        <li><a href="@Url.Action("Login", "Account")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    }
-
-                }
-                <li>
-                    <a href="@Url.Action("ViewCart", "Cart")" data-toggle="tooltip" title="Cart">
-                        <span class="glyphicon glyphicon-shopping-cart" data-toggle="tooltip" title="Cart"></span> Shopping Cart
-                        @if(Session["shoppingCart"] != null)
+    }
+                        else
                         {
-                            <span class="badge">@Session["shoppingCart"]</span>
+                            <li><a href="@Url.Action("Login", "Account")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         }
-                    </a>
-                </li>
-            </ul>
+
+                    }
+                    <li>
+                        <a href="@Url.Action("ViewCart", "Cart")" data-toggle="tooltip" title="Cart">
+                            <span class="glyphicon glyphicon-shopping-cart" data-toggle="tooltip" title="Cart"></span> Shopping Cart
+                            @if (Session["shoppingCart"] != null)
+        {
+                                <span class="badge">@Session["shoppingCart"]</span>
+    }
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 2hours.com</p>
+        </footer>
+    </div>
 
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - 2hours.com</p>
-    </footer>
-</div>
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
