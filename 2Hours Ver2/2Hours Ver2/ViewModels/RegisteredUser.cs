@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _2Hours_Ver2.ViewModel
 {
-    class RegisteredUser
+    public class RegisteredUser
     {
         [Required]
         [Display(Name = "User name")]
