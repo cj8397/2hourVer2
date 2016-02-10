@@ -261,7 +261,7 @@ namespace _2Hours_Ver2.Controllers
         }
 
         [Authorize]
-        public ActionResult UpdateProfile()
+        public ActionResult UserProfile()
         {
 
             return View();

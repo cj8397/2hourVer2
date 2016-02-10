@@ -351,6 +351,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\UserArea.cshtml" />
     <Content Include="Views\Account\AdminOnly.cshtml" />
+    <Content Include="Views\Account\AdminOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

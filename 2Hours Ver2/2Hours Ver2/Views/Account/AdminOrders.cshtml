@@ -1,0 +1,55 @@
+﻿@model IEnumerable<_2Hours_Ver2.OrderProduct>
+
+@{
+    ViewBag.Title = "AdminOrders";
+}
+
+<h2>AdminOrders</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sessionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updatedSession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.orderNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sessionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updatedSession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) 
+        </td>
+    </tr>
+}
+
+</table>
