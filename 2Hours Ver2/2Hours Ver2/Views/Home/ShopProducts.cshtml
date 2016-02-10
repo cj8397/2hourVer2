@@ -6,9 +6,6 @@
 
 <h2>Shop Products</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -44,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.producType)
         </td>
         <td>
-            @Html.ActionLink("Add to Cart", "Add", new { productID = item.productID }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Add to Cart", "Add", "Cart", new { productID = item.productID }, new { @class = "btn btn-default" })
         </td>
     </tr>
 }
