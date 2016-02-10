@@ -10,6 +10,7 @@ namespace _2Hours_Ver2.Controllers
     public class HomeController : Controller
     {
         private mergedEntities db = new mergedEntities();
+
         public ActionResult Index()
         {
             return View();

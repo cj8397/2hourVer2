@@ -1,0 +1,50 @@
+﻿@model IEnumerable<_2Hours_Ver2.Models.Products>
+
+@{
+    ViewBag.Title = "ShopProducts";
+}
+
+<h2>Shop Products</h2>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.producType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="~/Content/imgs/img[@item.productID].jpg" width="200" height="200" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.producType)
+        </td>
+        <td>
+            @Html.ActionLink("Add to Cart", "Add", "Cart", new { productID = item.productID }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
