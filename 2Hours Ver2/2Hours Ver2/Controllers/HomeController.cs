@@ -107,10 +107,10 @@ namespace _2Hours_Ver2.Controllers
                                 + callbackUrl + "\">Confirm Registration</a>";
                 ViewBag.FakeConfirmation = email;
 
-            }
+                }
             return View();
-        }
-       
+            }
+
         [Authorize]
         public ActionResult SecureArea()
         {
@@ -373,7 +373,6 @@ namespace _2Hours_Ver2.Controllers
                                          protocol: Request.Url.Scheme);
             ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
                                      + callbackUrl + "\">here</a>";
-
             return View();
         }
 
@@ -400,7 +399,7 @@ namespace _2Hours_Ver2.Controllers
             else
                 ViewBag.Result = "The password has not been reset.";
             return View();
-        }
+    }
 
 
 
