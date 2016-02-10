@@ -36,12 +36,12 @@ namespace _2Hours_Ver2.Controllers
 
         public ActionResult Search(string searchString)
         {
-            Products product = new Products();
-            IEnumerable<ProductSearch> products = product.GetAllProducts(searchString);
+            //Products product = new Products();
+            //IEnumerable<ProductSearch> products = product.GetAllProducts(searchString);
 
-            // Store current search and sort filter parameters.
-            ViewBag.CurrentFilter = searchString;
-            return View(products);
+            //// Store current search and sort filter parameters.
+            //ViewBag.CurrentFilter = searchString;
+            return View(/*products*/);
         }
 
 
