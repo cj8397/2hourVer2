@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using _2Hours_Ver2.ViewModels;
+using shoppingCart.BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +11,15 @@ using System.Net;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-
-
+using _2Hours_Ver2.Models;
 
 namespace _2Hours_Ver2.Controllers
 {
     public class HomeController : Controller
     {
+        private mergedEntities db = new mergedEntities();
 
-        
+        // GET: Home
         public ActionResult Index()
         {
             return View();
@@ -87,6 +89,13 @@ namespace _2Hours_Ver2.Controllers
 
             if (result.Succeeded)
             {
+                var authenticationManager
+                                  = HttpContext.Request.GetOwinContext().Authentication;
+                var userIdentity = manager.CreateIdentity(identityUser,
+                                           DefaultAuthenticationTypes.ApplicationCookie);
+                authenticationManager.SignIn(new AuthenticationProperties() { },
+                                             userIdentity);
+                return RedirectToAction("_User", "Home");
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
@@ -124,9 +133,8 @@ namespace _2Hours_Ver2.Controllers
         [HttpPost]
         public ActionResult AddRole(AspNetRole role)
         {
-            hoursLoginEntities context = new hoursLoginEntities();
-            context.AspNetRoles.Add(role);
-            context.SaveChanges();
+            db.AspNetRoles.Add(role);
+            db.SaveChanges();
             return View();
         }
 
@@ -138,14 +146,13 @@ namespace _2Hours_Ver2.Controllers
         [HttpPost]
         public ActionResult AddUserToRole(string userName, string roleName)
         {
-            hoursLoginEntities context = new hoursLoginEntities();
-            AspNetUser user = context.AspNetUsers
+            AspNetUser user = db.AspNetUsers
                              .Where(u => u.UserName == userName).FirstOrDefault();
-            AspNetRole role = context.AspNetRoles
+            AspNetRole role = db.AspNetRoles
                              .Where(r => r.Name == roleName).FirstOrDefault();
 
             user.AspNetRoles.Add(role);
-            context.SaveChanges();
+            db.SaveChanges();
             return View();
         }
 
@@ -394,5 +401,7 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }
 
-    }
+
+
+    }//end home controller
 }

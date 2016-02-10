@@ -26,8 +26,8 @@ namespace _2Hours_Ver2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=brown.mysitehosted.com;Initial Catalog=2hoursLogin;User ID=projectPha" +
-            "se2;Password=projectPhase2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=brown.mysitehosted.com;Initial Catalog=2hoursMerged;User ID=2hours;Pa" +
+            "ssword=2hours")]
         public string Setting {
             get {
                 return ((string)(this["Setting"]));

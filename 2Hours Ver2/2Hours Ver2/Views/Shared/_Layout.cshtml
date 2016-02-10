@@ -17,57 +17,72 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("2hours", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Shop Now", "Index", "Cart")</li>
+    @{
+        if (Request.IsAuthenticated)
+        {
+                            <li>@Html.ActionLink("User Area", "_User", "Home")</li>
+
+                            if ((User.IsInRole("Admin")))
+                            {
+
+                                <li>@Html.ActionLink("Orders", "ManagerOnly", "Home")</li>
+                                <li>@Html.ActionLink("Products", "ManagerOnly", "Home")</li>
+                                <li>@Html.ActionLink("Suppliers", "ManagerOnly", "Home")</li>
+
+        }
+
+                            <li><span class="label label-info">@Html.Raw(User.Identity.Name)</span></li>
+                            <li><a href="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    }
+                        else
+                        {
+                            <li>@Html.ActionLink("Register", "Register", "Home")</li>
+                            <li><a href="@Url.Action("Login", "Home")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        }
+
+                    }
+                    <li>
+                        <a href="@Url.Action("ViewCart", "Cart")" data-toggle="tooltip" title="Cart">
+                            <span class="glyphicon glyphicon-shopping-cart" data-toggle="tooltip" title="Cart"></span> Shopping Cart
+                            @if (Session["shoppingCart"] != null)
+        {
+                                <span class="badge">@Session["shoppingCart"]</span>
+    }
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 
-    @{
-        if (Request.IsAuthenticated)
-        {
-
-            @Html.ActionLink("User Area", "_User", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Profile Area", "_Profile", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-        }
-    }
-
-    @{
-        if (Request.IsAuthenticated && User.IsInRole("Admin"))
-        {
-            @Html.ActionLink("Orders", "AdminOrders", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Products", "AdminProduct", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-            @Html.ActionLink("Suppliers", "AdminSupplier", "Home");
-            @Html.Raw("&nbsp;|&nbsp;");
-        }
-    }
-@{
+@*@{
     if (Request.IsAuthenticated)
     {
-
+    
         @Html.Raw("[")
         @Html.Raw(User.Identity.Name)
         @Html.Raw("]")
         @Html.ActionLink("Logout", "Logout", "Home")
     }
 }
-    <br />
+    <br />*@
 
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - 2hours.com</p>
         </footer>
     </div>
 
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
