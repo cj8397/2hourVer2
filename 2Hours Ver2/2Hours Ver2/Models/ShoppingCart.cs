@@ -14,7 +14,7 @@ namespace _2Hours_Ver2.Models
 
         public IQueryable<CartItem> GetAllItems(string sessionID)
         {
-            var products = (from p in db.Products
+            var items = (from p in db.Products
                             from op in p.OrderProducts
                             where op.sessionID == sessionID && op.productID == p.productID
                             select new CartItem
@@ -25,7 +25,7 @@ namespace _2Hours_Ver2.Models
                                 Quantity = (int)op.quantity,
                                 SessionID = op.sessionID
                             });
-            return products;
+            return items;
         }
 
         public CartItem GetItem(int productID, string sessionID)

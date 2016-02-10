@@ -9,7 +9,7 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,32 +20,19 @@
                 @Html.ActionLink("2hours", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <div class="dropdown">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About Us", "AboutUs", "Home")</li>
                     <li>@Html.ActionLink("FAQ", "FAQ", "Home")</li>
-                    <li class="dropdown-toggle" data-toggle="dropdown">
-                        @Html.ActionLink("Shop Now", "ShopProducts", "Home")<span class="caret"></span>
-                    <ul class="dropdown-menu">
-                        <li>Fruit</li>
-                    </ul>
-                </li>
+                    <li>@Html.ActionLink("Shop Now", "ShopProducts", "Home")</li>
                     <li>@Html.ActionLink("Contact Us", "ContactUs", "Home")</li>
-
                     @{
-                        if(Request.IsAuthenticated)
+                        if (Request.IsAuthenticated)
                         {
                             <li>@Html.ActionLink("User Area", "UserArea", "Account")</li>
 
-                            if((User.IsInRole("Admin")))
+                            if ((User.IsInRole("Admin")))
                             {
-                                <li>@Html.ActionLink("Administrators", "AdminOnly", "Account")</li>
-                                <li>@Html.ActionLink("Orders", "AdminOrders", "Account")</li>
-                                <li>@Html.ActionLink("Products", "AdminProducts", "Account")</li>
-                                <li>@Html.ActionLink("Suppliers", "AdminSuppliers", "Account")</li>
-                                <li>@Html.ActionLink("Users", "AdminViewUsers", "Account")</li>
-
                             }
 
                             <li><span class="label label-info">@Html.Raw(User.Identity.Name)</span></li>
@@ -60,19 +47,26 @@
                     <li>
                         <a href="@Url.Action("ViewCart", "Cart")" data-toggle="tooltip" title="Cart">
                             <span class="glyphicon glyphicon-shopping-cart" data-toggle="tooltip" title="Cart"></span> Shopping Cart
-                            @if(Session["shoppingCart"] != null)
+                            @if (Session["shoppingCart"] != null)
                             {
                                 <span class="badge">@Session["shoppingCart"]</span>
                             }
                         </a>
                     </li>
                 </ul>
-                    </div>
             </div>
         </div>
     </div>
 
     <div class="container body-content">
+
+        @using (Html.BeginForm())
+        {
+            <p class="search">
+                Find by product name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+            </p>
+        }
         @RenderBody()
         <hr />
         <footer>
