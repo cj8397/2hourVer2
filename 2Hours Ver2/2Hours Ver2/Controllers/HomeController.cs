@@ -373,6 +373,7 @@ namespace _2Hours_Ver2.Controllers
                                          protocol: Request.Url.Scheme);
             ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
                                      + callbackUrl + "\">here</a>";
+
             return View();
         }
 
