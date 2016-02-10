@@ -4,15 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="766fc2294bc44d5e80f06cd1ef3545e9" Name="Diagram1">
-        <EntityTypeShape EntityType="hoursLoginModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hoursLoginModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="hoursLoginModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="hoursLoginModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hoursLoginModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="hoursLoginModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="hoursLoginModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="hoursLoginModel.AspNetUserRoles" ManuallyRouted="false" />
+      <Diagram DiagramId="3d643502e5664f7eb1bd3d1d3f2853cf" Name="Diagram1">
+        <EntityTypeShape EntityType="hoursMergedModel.Category" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.OrderProduct" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.Product" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.Supplier" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.Visit" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetRole" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.AspNetUser" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoursMergedModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="hoursMergedModel.FK__Product__producT__6D9742D9" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__OrderDetail__Id__74444068" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__OrderProd__order__7720AD13" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__OrderProd__produ__7908F585" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__OrderProd__sessi__7814D14C" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK__Product__supplie__6E8B6712" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="hoursMergedModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
