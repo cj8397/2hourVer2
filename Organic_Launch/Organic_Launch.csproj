@@ -354,6 +354,8 @@
     <Content Include="Views\Farm\List.cshtml" />
     <Content Include="Views\Farm\Edit.cshtml" />
     <Content Include="Views\Farm\Delete.cshtml" />
+    <Content Include="Views\Admin Views\Admin.cshtml" />
+    <Content Include="Views\Farm\SingleProductAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
