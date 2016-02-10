@@ -1,20 +1,10 @@
 ﻿@model _2Hours_Ver2.ViewModel.RegisteredUser
 
 @{
-    Layout = null;
+    ViewBag.Title = "Register";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Register</title>
-</head>
-<body>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2>Register</h2>
     
     
     @using (Html.BeginForm()) 
@@ -69,5 +59,3 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
