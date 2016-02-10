@@ -366,8 +366,21 @@ namespace _2Hours_Ver2.Controllers
             var callbackUrl = Url.Action("ResetPassword", "Account",
                                          new { userId = user.Id, code = code },
                                          protocol: Request.Url.Scheme);
-            ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
+            string link = "Please reset your password by clicking <a href=\""
                                      + callbackUrl + "\">here</a>";
+
+
+            MailHelper mailer = new MailHelper();
+            string response = mailer.EmailFromArvixe(
+                                       new RegisteredUser(email, PASSWORD_RESET, link));
+            if (response != "Failure sending mail.")
+            {
+                ViewBag.Success = response;
+            }
+            else {
+                ViewBag.Failure = response;
+            }
+
             return View();
         }
 
