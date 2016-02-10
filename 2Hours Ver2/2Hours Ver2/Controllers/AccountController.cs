@@ -3,7 +3,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using _2Hours_Ver2.ViewModels;
-using shoppingCart.BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +11,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using _2Hours_Ver2.Models;
+using _2Hours_Ver2.BusinessLogic;
 
 namespace _2Hours_Ver2.Controllers
 {
@@ -52,7 +52,7 @@ namespace _2Hours_Ver2.Controllers
                     {
                         IsPersistent = false
                     }, identity);
-                    return RedirectToAction("SecureArea", "Home");
+                    return RedirectToAction("UserArea", "Account");
                 }
             }
             return View();
@@ -64,32 +64,20 @@ namespace _2Hours_Ver2.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisteredUser newUser)
-        {
-            var userStore = new UserStore<IdentityUser>();
+        public ActionResult Register(RegisteredUser newUser) {
+            var userStore         = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
             {
                 UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 1, 0),
+                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
                 MaxFailedAccessAttemptsBeforeLockout = 3
             };
 
-            var identityUser = new IdentityUser()
-            {
-                UserName = newUser.UserName,
-                Email = newUser.Email
-            };
+            var identityUser      = new IdentityUser() { UserName = newUser.UserName, 
+                                                         Email    = newUser.Email };
             IdentityResult result = manager.Create(identityUser, newUser.Password);
 
-            if (result.Succeeded)
-            {
-                var authenticationManager
-                                  = HttpContext.Request.GetOwinContext().Authentication;
-                var userIdentity = manager.CreateIdentity(identityUser,
-                                           DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties() { },
-                                             userIdentity);
-                return RedirectToAction("UserArea", "Home");
+            if (result.Succeeded) {
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
@@ -97,11 +85,27 @@ namespace _2Hours_Ver2.Controllers
                                                 new { userId = identityUser.Id, code = code },
                                                     protocol: Request.Url.Scheme);
 
-                string email = "Please confirm your account by clicking this link: <a href=\""
+                string link = "Please confirm your account by clicking this link: <a href=\""
                                 + callbackUrl + "\">Confirm Registration</a>";
-                ViewBag.FakeConfirmation = email;
+                newUser.ConfirmLink = link;                
+                // sending Email Start
+                MailHelper mailer = new MailHelper();
+                string response = mailer.EmailFromArvixe(
+                                           new RegisteredUser(newUser.Email, newUser.UserName,newUser.ConfirmLink ));
+                
+                if (response != "Failure sending mail."){
+                    ViewBag.Success = response;
+                }else{
+                    ViewBag.Failure = response;
+                }
 
+                // sending Email End
             }
+            return View();
+            }
+        [Authorize]
+        public ActionResult Welcome(string name) {
+            //ViewBag.UserName = name;
             return View();
         }
 
@@ -110,7 +114,7 @@ namespace _2Hours_Ver2.Controllers
             var ctx = Request.GetOwinContext();
             var authenticationManager = ctx.Authentication;
             authenticationManager.SignOut();
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
@@ -155,13 +159,15 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminOrderDetails()
         {
-            return View();
+            var details = db.OrderDetails.ToList();
+            return View(details);
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult AdminOrders()
         {
-            return View();
+            var orders = db.OrderProducts.ToList();
+            return View(orders);
         }
 
         [Authorize(Roles = "Admin")]
@@ -173,7 +179,8 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminProducts()
         {
-            return View();
+            var products = db.Products.ToList();
+            return View(products);
         }
 
         [Authorize(Roles = "Admin")]
@@ -197,7 +204,8 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminSuppliers()
         {
-            return View();
+            var suppliers = db.Suppliers.ToList();
+            return View(suppliers);
         }
 
         [Authorize(Roles = "Admin")]
@@ -221,7 +229,8 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminViewUsers()
         {
-            return View();
+            var users = db.AspNetUsers.ToList();
+            return View(users);
         }
 
         [Authorize(Roles = "Admin")]
@@ -354,7 +363,7 @@ namespace _2Hours_Ver2.Controllers
             CreateTokenProvider(manager, PASSWORD_RESET);
 
             var code = manager.GeneratePasswordResetToken(user.Id);
-            var callbackUrl = Url.Action("ResetPassword", "Home",
+            var callbackUrl = Url.Action("ResetPassword", "Account",
                                          new { userId = user.Id, code = code },
                                          protocol: Request.Url.Scheme);
             ViewBag.FakeEmailMessage = "Please reset your password by clicking <a href=\""
