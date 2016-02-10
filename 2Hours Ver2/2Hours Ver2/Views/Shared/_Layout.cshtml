@@ -64,8 +64,15 @@
         </div>
     </div>
 
-
     <div class="container body-content">
+
+        @using (Html.BeginForm())
+        {
+            <p class="search">
+                Find by product name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+            </p>
+        }
         @RenderBody()
         <hr />
         <footer>
