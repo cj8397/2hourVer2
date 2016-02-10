@@ -17,12 +17,12 @@ namespace _2Hours_Ver2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Products = new HashSet<ProductSearch>();
+            this.Products = new HashSet<Product>();
         }
     
         public string productType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSearch> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
