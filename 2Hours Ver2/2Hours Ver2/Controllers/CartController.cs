@@ -16,11 +16,6 @@ namespace _2Hours_Ver2.Controllers
         private ShoppingCart shoppingCart = new ShoppingCart();
         private Session session = new Session();
 
-        public ActionResult Index()
-        {
-            var products = db.Products.ToList();
-            return View(products);
-        }
 
         public ActionResult Add(int productID)
         {
@@ -98,5 +93,6 @@ namespace _2Hours_Ver2.Controllers
             shoppingCart.RemoveItem(productID, session.SessionID);
             return RedirectToAction("ViewCart");
         }
-    }
+
+    }//end cart controller
 }

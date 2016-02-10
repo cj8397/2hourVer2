@@ -152,9 +152,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\imgs\admin.png" />
     <Content Include="Content\imgs\img[1].jpg" />
     <Content Include="Content\imgs\img[2].jpg" />
     <Content Include="Content\imgs\img[3].jpg" />
+    <Content Include="Content\imgs\Staff.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -258,7 +260,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="BusinessLogic\MailHelper.cs" />
+    <Compile Include="BusinessLogic\Mailer.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -325,25 +328,23 @@
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\SecureArea.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\AddRole.cshtml" />
-    <Content Include="Views\Home\AddUserToRole.cshtml" />
-    <Content Include="Views\Home\AdminOrders.cshtml" />
-    <Content Include="Views\Home\AdminProduct.cshtml" />
-    <Content Include="Views\Home\AdminSupplier.cshtml" />
-    <Content Include="Views\Home\_Profile.cshtml" />
-    <Content Include="Views\Home\_User.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\Add.cshtml" />
     <Content Include="Views\Cart\ThankYou.cshtml" />
     <Content Include="Views\Cart\ViewCart.cshtml" />
-    <Content Include="Views\Home\ConfirmEmail.cshtml" />
-    <Content Include="Views\Home\ForgotPassword.cshtml" />
-    <Content Include="Views\Home\ResetPassword.cshtml" />
+    <Content Include="Views\Account\UserArea.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\AddRole.cshtml" />
+    <Content Include="Views\Account\AddUserToRole.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Account\AdminOnly.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

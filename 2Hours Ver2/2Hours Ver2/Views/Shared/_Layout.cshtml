@@ -21,28 +21,32 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Shop Now", "Index", "Cart")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About Us", "AboutUs", "Home")</li>
+                    <li>@Html.ActionLink("FAQ", "FAQ", "Home")</li>
+                    <li>@Html.ActionLink("Shop Now", "ShopProducts", "Home")</li>
+                    <li>@Html.ActionLink("Contact Us", "ContactUs", "Cart")</li>
     @{
         if (Request.IsAuthenticated)
         {
-                            <li>@Html.ActionLink("User Area", "_User", "Home")</li>
+                            <li>@Html.ActionLink("User Area", "UserArea", "Account")</li>
 
                             if ((User.IsInRole("Admin")))
                             {
+                                <li>@Html.ActionLink("Administrators", "AdminOnly", "Account")</li>
+                                <li>@Html.ActionLink("Orders", "AdminOrders", "Account")</li>
+                                <li>@Html.ActionLink("Products", "AdminProducts", "Account")</li>
+                                <li>@Html.ActionLink("Suppliers", "AdminSuppliers", "Account")</li>
+                                <li>@Html.ActionLink("Users", "AdminViewUsers", "Account")</li>
 
-                                <li>@Html.ActionLink("Orders", "ManagerOnly", "Home")</li>
-                                <li>@Html.ActionLink("Products", "ManagerOnly", "Home")</li>
-                                <li>@Html.ActionLink("Suppliers", "ManagerOnly", "Home")</li>
-
-        }
+            }
 
                             <li><span class="label label-info">@Html.Raw(User.Identity.Name)</span></li>
-                            <li><a href="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            <li><a href="@Url.Action("Logout", "Account")"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     }
                         else
                         {
-                            <li>@Html.ActionLink("Register", "Register", "Home")</li>
-                            <li><a href="@Url.Action("Login", "Home")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li><a href="@Url.Action("Login", "Account")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         }
 
                     }
@@ -60,17 +64,6 @@
         </div>
     </div>
 
-@*@{
-    if (Request.IsAuthenticated)
-    {
-    
-        @Html.Raw("[")
-        @Html.Raw(User.Identity.Name)
-        @Html.Raw("]")
-        @Html.ActionLink("Logout", "Logout", "Home")
-    }
-}
-    <br />*@
 
     <div class="container body-content">
         @RenderBody()

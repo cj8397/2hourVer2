@@ -7,7 +7,7 @@ using _2Hours_Ver2.ViewModel;
 
 namespace inclass2_aspnet2.BusinessLogic
 {
-    public class MailHelper
+    public class Mailer
     {
         public const string SUCCESS
         = "Your email has been sent.  Please allow up to 48 hrs for a reply.";
