@@ -348,6 +348,8 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\ShopProducts.cshtml" />
     <Content Include="Views\Account\AddUserToRole.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\UserArea.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
