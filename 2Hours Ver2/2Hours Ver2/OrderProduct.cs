@@ -21,7 +21,7 @@ namespace _2Hours_Ver2
         public Nullable<int> orderNumber { get; set; }
     
         public virtual OrderDetail OrderDetail { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual ProductSearch Product { get; set; }
         public virtual Visit Visit { get; set; }
     }
 }

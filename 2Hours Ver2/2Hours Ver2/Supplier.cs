@@ -17,7 +17,7 @@ namespace _2Hours_Ver2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
-            this.Products = new HashSet<Product>();
+            this.Products = new HashSet<ProductSearch>();
         }
     
         public int supplierID { get; set; }
@@ -27,6 +27,6 @@ namespace _2Hours_Ver2
         public string phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ProductSearch> Products { get; set; }
     }
 }
