@@ -11,8 +11,10 @@ namespace inclass2_aspnet2.BusinessLogic
     {
         public const string SUCCESS
         = "Your email has been sent.  Please allow up to 48 hrs for a reply.";
-
         public const string FAILURE = "Failure sending mail.";
+
+        public const string MAIL_SUBJECT = "Confirm Registeration";
+        public const string CONFIRM_BODY = "Please click here to confirm your registeration";
 
         //const string TO = "hassanhosseinpoor@yahoo.com"; // Specify where you want this email sent.
         // This value may/may not be constant.
@@ -32,8 +34,10 @@ namespace inclass2_aspnet2.BusinessLogic
             try
             {
                 MailMessage mailMsg = new MailMessage(FROM, TO);
-                mailMsg.Subject = message.Subject;
-                mailMsg.Body = message.Body + "<br/>sent by: " + message.Sender;
+                //mailMsg.Subject = message.Subject;
+                mailMsg.Subject = MAIL_SUBJECT;
+                //mailMsg.Body = message.Body + "<br/>sent by: " + message.Sender;
+                mailMsg.Body = CONFIRM_BODY + "<br/>sent by: " + message.Sender;
                 mailMsg.IsBodyHtml = USE_HTML;
 
                 SmtpClient smtp = new SmtpClient();
