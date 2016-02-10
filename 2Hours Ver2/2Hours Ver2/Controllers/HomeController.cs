@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using _2Hours_Ver2.ViewModel;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System;
@@ -18,6 +19,50 @@ namespace _2Hours_Ver2.Controllers
         {
             return View();
         }
+
+
+
+
+
+        [HttpPost]
+        public ActionResult Index(Login login)
+        {
+            // UserStore and UserManager manages data retreival.
+            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            IdentityUser identityUser = manager.Find(login.UserName,
+                                                             login.Password);
+
+            if (ModelState.IsValid)
+            {
+                if (identityUser != null)
+                {
+                    IAuthenticationManager authenticationManager
+                                           = HttpContext.GetOwinContext().Authentication;
+                    authenticationManager
+                   .SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+                    var identity = new ClaimsIdentity(new[] {
+                                            new Claim(ClaimTypes.Name, login.UserName),
+                                        },
+                                        DefaultAuthenticationTypes.ApplicationCookie,
+                                        ClaimTypes.Name, ClaimTypes.Role);
+                    // SignIn() accepts ClaimsIdentity and issues logged in cookie. 
+                    authenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = false
+                    }, identity);
+                    return RedirectToAction("SecureArea", "Home");
+                }
+            }
+            return View();
+        }
+
+
+
+
+
+
 
         [Authorize(Roles = "Admin")]        
         public ActionResult Admin()
