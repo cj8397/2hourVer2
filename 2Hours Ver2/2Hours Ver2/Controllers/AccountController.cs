@@ -159,13 +159,15 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminOrderDetails()
         {
-            return View();
+            var details = db.OrderDetails.ToList();
+            return View(details);
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult AdminOrders()
         {
-            return View();
+            var orders = db.OrderProducts.ToList();
+            return View(orders);
         }
 
         [Authorize(Roles = "Admin")]
@@ -177,7 +179,8 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminProducts()
         {
-            return View();
+            var products = db.Products.ToList();
+            return View(products);
         }
 
         [Authorize(Roles = "Admin")]
@@ -201,7 +204,8 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminSuppliers()
         {
-            return View();
+            var suppliers = db.Suppliers.ToList();
+            return View(suppliers);
         }
 
         [Authorize(Roles = "Admin")]
@@ -225,7 +229,8 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AdminViewUsers()
         {
-            return View();
+            var users = db.AspNetUsers.ToList();
+            return View(users);
         }
 
         [Authorize(Roles = "Admin")]
