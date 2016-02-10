@@ -340,13 +340,13 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\AddRole.cshtml" />
-    <Content Include="Views\Account\AddUserToRole.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Account\AdminOnly.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\ShopProducts.cshtml" />
+    <Content Include="Views\Account\AddUserToRole.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
