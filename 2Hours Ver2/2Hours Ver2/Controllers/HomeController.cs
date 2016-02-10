@@ -23,13 +23,13 @@ namespace _2Hours_Ver2.Controllers
         }
 
         public ActionResult ShopProducts()
-        {
+            {
             var products = db.Products.ToList();
             return View(products);
-        }
-
+            }
+       
         public ActionResult ContactUs()
-        {
+            {
             return View();
         }
 
