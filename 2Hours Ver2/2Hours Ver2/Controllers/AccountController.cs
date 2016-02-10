@@ -3,7 +3,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using _2Hours_Ver2.ViewModels;
-using shoppingCart.BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +11,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using _2Hours_Ver2.Models;
+using _2Hours_Ver2.BusinessLogic;
 
 namespace _2Hours_Ver2.Controllers
 {
@@ -64,44 +64,48 @@ namespace _2Hours_Ver2.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisteredUser newUser)
-        {
-            var userStore = new UserStore<IdentityUser>();
+        public ActionResult Register(RegisteredUser newUser) {
+            var userStore         = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
             {
                 UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 1, 0),
+                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
                 MaxFailedAccessAttemptsBeforeLockout = 3
             };
 
-            var identityUser = new IdentityUser()
-            {
-                UserName = newUser.UserName,
-                Email = newUser.Email
-            };
+            var identityUser      = new IdentityUser() { UserName = newUser.UserName, 
+                                                         Email    = newUser.Email };
             IdentityResult result = manager.Create(identityUser, newUser.Password);
 
-            if (result.Succeeded)
-            {
-                var authenticationManager
-                                  = HttpContext.Request.GetOwinContext().Authentication;
-                var userIdentity = manager.CreateIdentity(identityUser,
-                                           DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties() { },
-                                             userIdentity);
-                return RedirectToAction("UserArea", "Home");
+            if (result.Succeeded) {
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
-                var callbackUrl = Url.Action("ConfirmEmail", "Home",
+                var callbackUrl = Url.Action("ConfirmEmail", "Account",
                                                 new { userId = identityUser.Id, code = code },
                                                     protocol: Request.Url.Scheme);
 
-                string email = "Please confirm your account by clicking this link: <a href=\""
+                string link = "Please confirm your account by clicking this link: <a href=\""
                                 + callbackUrl + "\">Confirm Registration</a>";
-                ViewBag.FakeConfirmation = email;
+                newUser.ConfirmLink = link;                
+                // sending Email Start
+                MailHelper mailer = new MailHelper();
+                string response = mailer.EmailFromArvixe(
+                                           new RegisteredUser(newUser.Email, newUser.UserName,newUser.ConfirmLink ));
+                
+                if (response != "Failure sending mail."){
+                    ViewBag.Success = response;
+                }else{
+                    ViewBag.Failure = response;
+                }
 
+                // sending Email End
             }
+            return View();
+        }
+        [Authorize]
+        public ActionResult Welcome(string name) {
+            //ViewBag.UserName = name;
             return View();
         }
 
