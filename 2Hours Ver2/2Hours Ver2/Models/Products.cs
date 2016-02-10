@@ -17,6 +17,7 @@ namespace _2Hours_Ver2.Models
             if (!String.IsNullOrEmpty(searchString))
                 products = products.Where(
                             p => p.ProductName.ToUpper().Contains(searchString.ToUpper()));
+                            
             return products;
         }
 
