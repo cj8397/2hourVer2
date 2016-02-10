@@ -348,7 +348,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
-    <Content Include="Views\Account\AdminOnly.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Home\ShopProducts.cshtml" />
     <Content Include="Views\Account\AddUserToRole.cshtml" />
