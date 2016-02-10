@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "AdminOnly";
+}
+
+
+<h2>Administrators Area</h2>
+
+<img src="~/Content/imgs/admin.png" width="200" height="200" />
+
+<div class="jumbotron">
+    <p>This page is only visible to administrators.</p>
+    <p>TESSSSST!</p>
+</div>
+
+@{
+    if ((Request.IsAuthenticated) && (User.IsInRole("Admin")))
+    {
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="@Url.Action("AdminOrders", "Account")">Orders</a></li>
+            <li><a data-toggle="tab" href="@Url.Action("AdminProducts", "Account")">Products</a></li>
+            <li><a data-toggle="tab" href="@Url.Action("AdminSuppliers", "Account")">Suppliers</a></li>
+            <li><a data-toggle="tab" href="@Url.Action("AdminViewUsers", "Account")">Users</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="orders" class="tab-pane fade in active">
+                <h3>Orders</h3>
+                <p>Some content.</p>
+            </div>
+            <div id="products" class="tab-pane fade">
+                <h3>Products</h3>
+                <p>Some content in menu 1.</p>
+            </div>
+            <div id="suppliers" class="tab-pane fade">
+                <h3>Suppliers</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="users" class="tab-pane fade">
+                <h3>Users</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+        </div>
+
+    }
+}
+
