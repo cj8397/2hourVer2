@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2Hours_Ver2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,6 +34,15 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }
 
+        public ActionResult Search(string searchString)
+        {
+            //Products product = new Products();
+            //IEnumerable<ProductSearch> products = product.GetAllProducts(searchString);
+
+            //// Store current search and sort filter parameters.
+            //ViewBag.CurrentFilter = searchString;
+            return View(/*products*/);
+        }
 
 
     }//end home controller
