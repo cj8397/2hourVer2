@@ -30,7 +30,7 @@ namespace _2Hours_Ver2
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderProduct> OrderProducts { get; set; }
-        public virtual DbSet<ProductSearch> Products { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Visit> Visits { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }

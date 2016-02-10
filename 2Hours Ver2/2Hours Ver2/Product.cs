@@ -12,10 +12,10 @@ namespace _2Hours_Ver2
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductSearch
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductSearch()
+        public Product()
         {
             this.OrderProducts = new HashSet<OrderProduct>();
         }
@@ -31,6 +31,5 @@ namespace _2Hours_Ver2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         public virtual Supplier Supplier { get; set; }
-        public object ProductName { get; internal set; }
     }
 }
