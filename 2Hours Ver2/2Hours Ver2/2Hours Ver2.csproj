@@ -199,6 +199,9 @@
     <Content Include="Prototype\FAQ.html" />
     <Content Include="Prototype\ForgotPassword.html" />
     <Content Include="Prototype\Fruit.html" />
+    <Content Include="Prototype\Images\2 hours_usercase.jpg" />
+    <Content Include="Prototype\Images\UpatedERD.PNG" />
+    <Content Include="Prototype\Images\UpdatedERD2.JPG" />
     <Content Include="Prototype\index.html" />
     <Content Include="Prototype\login.html" />
     <Content Include="Prototype\Meat.html" />
@@ -356,7 +359,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Prototype\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
