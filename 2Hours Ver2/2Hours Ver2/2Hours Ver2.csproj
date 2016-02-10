@@ -315,10 +315,10 @@
     <Compile Include="ViewModels\Login.cs" />
     <Compile Include="ViewModels\RegisteredUser.cs" />
     <Compile Include="ViewModels\UserRole.cs" />
+    <Compile Include="ViewModels\Message.cs" />
     <Compile Include="Visit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Message.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
