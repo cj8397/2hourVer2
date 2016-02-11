@@ -11,13 +11,9 @@
     <p>You are in the secure area which is available to all authenticated users.</p>
 </div>
 
-@{
-    if ((Request.IsAuthenticated))
-    {
-
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="@Url.Action("UserOrders", "Account")">Orders</a></li>
-            <li><a data-toggle="tab" href="@Url.Action("UserProfile", "Account")">Products</a></li>
+            <li class="active"><a data-toggle="tab" href="#orders">Orders</a></li>
+            <li><a data-toggle="tab" href="#profile">Profile</a></li>
         </ul>
 
         <div class="tab-content">
@@ -30,6 +26,3 @@
                 <p>Some content in menu 1.</p>
             </div>
         </div>
-
-    }
-}
