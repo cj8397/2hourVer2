@@ -19,10 +19,10 @@
         <div class="tab-content">
             <div id="orders" class="tab-pane fade in active">
                 <h3>Orders</h3>
-                <p>Some content.</p>
+                @Html.Partial("_UserOrderDetails", TempData["orders"])
             </div>
             <div id="profile" class="tab-pane fade">
                 <h3>Profile</h3>
-                <p>Some content in menu 1.</p>
+                @Html.Partial("_ProfileDetails", TempData["profile"])
             </div>
         </div>
