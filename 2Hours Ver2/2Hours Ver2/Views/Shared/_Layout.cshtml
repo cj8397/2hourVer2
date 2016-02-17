@@ -30,12 +30,12 @@
                         if (Request.IsAuthenticated)
                         {
 
-                            if ((User.IsInRole("Admin")))
+                            if (User.IsInRole("Admin"))
                             {
                                 <li>@Html.ActionLink("Administrators", "AdminOnly", "Account")</li>
-
                             }
-                            else
+
+                            if (User.IsInRole("User"))
                             {
                                 <li>@Html.ActionLink("User Area", "UserArea", "Account")</li>
                             }
