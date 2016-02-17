@@ -31,11 +31,12 @@ namespace _2Hours_Ver2.Controllers
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             IdentityUser identityUser = manager.Find(login.UserName,
-                                                             login.Password);
-
+                                                             login.Password);            
+            TempData["Login"] = login;
             if (ModelState.IsValid)
             {
-                if (ValidLogin(login))
+                AccountRepo accountRepo = new AccountRepo();
+                if (accountRepo.ValidLogin(login))
                 {
                     IAuthenticationManager authenticationManager
                                            = HttpContext.GetOwinContext().Authentication;
@@ -254,8 +255,10 @@ namespace _2Hours_Ver2.Controllers
         [Authorize]
         public ActionResult UserArea()
         {
+            AccountRepo accountRepo = new AccountRepo();
+            var login = TempData["Login"];
             TempData["orders"] = db.OrderDetails.ToList();
-            TempData["profile"] = db.AspNetUsers ;
+            TempData["profile"] = accountRepo.GetDetail((Login)login);
             return View();
         }
         [Authorize]
@@ -268,55 +271,16 @@ namespace _2Hours_Ver2.Controllers
         [Authorize]
         public ActionResult ProfileDetails()
         {
-
-            return PartialView("_ProfileDetails");
+            AccountRepo accountRepo = new AccountRepo();
+            var login = TempData["Login"];
+            AspNetUser aspNetUser = accountRepo.GetDetail((Login)login);
+            return PartialView("_ProfileDetails",aspNetUser);
         }
 
         [Authorize]
         public ActionResult PasswordReset()
         {
             return View();
-        }
-
-        bool ValidLogin(Login login)
-        {
-            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(userStore)
-            {
-                UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 1, 0),
-                MaxFailedAccessAttemptsBeforeLockout = 3
-            };
-            var user = userManager.FindByName(login.UserName);
-
-            if (user == null)
-                return false;
-
-            // User is locked out.
-            if (userManager.SupportsUserLockout && userManager.IsLockedOut(user.Id))
-                return false;
-
-            // Validated user was locked out but now can be reset.
-            if (userManager.CheckPassword(user, login.Password)
-                      && userManager.IsEmailConfirmed(user.Id))
-
-            {
-                if (userManager.SupportsUserLockout
-                 && userManager.GetAccessFailedCount(user.Id) > 0)
-                {
-                    userManager.ResetAccessFailedCount(user.Id);
-                }
-            }
-            // Login is invalid so increment failed attempts.
-            else {
-                bool lockoutEnabled = userManager.GetLockoutEnabled(user.Id);
-                if (userManager.SupportsUserLockout && userManager.GetLockoutEnabled(user.Id))
-                {
-                    userManager.AccessFailed(user.Id);
-                    return false;
-                }
-            }
-            return true;
         }
 
         const string EMAIL_CONFIRMATION = "EmailConfirmation";
@@ -342,7 +306,7 @@ namespace _2Hours_Ver2.Controllers
             }
             catch
             {
-                ViewBag.Message = "<p class='alert alert-danger>Error! Validation attempt failed.</p>";
+                ViewBag.Message = "<p class='alert alert-danger'>Error! Validation attempt failed.</p>";
             }
             return View();
         }
@@ -407,6 +371,8 @@ namespace _2Hours_Ver2.Controllers
                 ViewBag.Result = "<p class='alert alert-danger'>Error! Your password has not been reset.</p>";
             return View();
         }
+
+       
 
 
 

@@ -30,6 +30,8 @@ namespace _2Hours_Ver2.ViewModel
         [Compare("Password", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        public string TelNumber { get; set; }
+
         public string ConfirmLink { get; set; }
 
         public RegisteredUser() { }
