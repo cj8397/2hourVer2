@@ -32,7 +32,7 @@ namespace _2Hours_Ver2.Controllers
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             IdentityUser identityUser = manager.Find(login.UserName,
                                                              login.Password);
-
+            ViewBag.Login = login;
             if (ModelState.IsValid)
             {
                 AccountRepo accountRepo = new AccountRepo();
@@ -366,6 +366,12 @@ namespace _2Hours_Ver2.Controllers
             else
                 ViewBag.Result = "<p class='alert alert-danger'>Error! Your password has not been reset.</p>";
             return View();
+        }
+
+        public ActionResult Details()
+        {
+            AccountRepo accountRepo = new AccountRepo();            
+            return View(accountRepo.GetDetail(ViewBag.Login));
         }
 
 

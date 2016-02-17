@@ -22,18 +22,20 @@ namespace _2Hours_Ver2.Models
 
             db.SaveChanges();
             return aspNetUser;
-        }
+        }       
 
-
-
-        public AspNetUser Getdetail(string Id)
+        public AspNetUser GetDetail(Login login)
         {
+            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            IdentityUser identityUser = manager.Find(login.UserName,
+                                                             login.Password);
             mergedEntities db = new mergedEntities();
             AspNetUser USER = new AspNetUser();
 
             var query =
             from a in db.AspNetUsers
-            where (a.Id == Id)
+            where (a.Id == identityUser.Id)
              select new
             {
                 ID = a.Id,
