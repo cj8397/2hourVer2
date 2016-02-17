@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Database Script.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -352,7 +353,6 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\UserArea.cshtml" />
     <Content Include="Views\Account\AdminOnly.cshtml" />
-    <Content Include="Views\Shared\_AdminProducts.cshtml" />
     <Content Include="Views\Shared\_AdminOrderDetails.cshtml" />
     <Content Include="Views\Shared\_AdminSuppliers.cshtml" />
     <Content Include="Views\Shared\_AdminViewUsers.cshtml" />
@@ -366,9 +366,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
