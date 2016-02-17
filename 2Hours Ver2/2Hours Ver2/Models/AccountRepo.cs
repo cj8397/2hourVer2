@@ -23,6 +23,34 @@ namespace _2Hours_Ver2.Models
             db.SaveChanges();
             return aspNetUser;
         }
+
+
+
+        public AspNetUser Getdetail(string Id)
+        {
+            mergedEntities db = new mergedEntities();
+            AspNetUser USER = new AspNetUser();
+
+            var query =
+            from a in db.AspNetUsers
+            where (a.Id == Id)
+             select new
+            {
+                ID = a.Id,
+                UserName = a.UserName,
+                PhoneNumber = a.PhoneNumber,           
+            };
+
+            foreach (var item in query)
+            {
+                USER.Id = item.ID;
+                USER.UserName = item.UserName;
+                USER.PhoneNumber = item.PhoneNumber;
+            }
+
+            return USER;
+        }
+
         public bool ValidLogin(Login login)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
