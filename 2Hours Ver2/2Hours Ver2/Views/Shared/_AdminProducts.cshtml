@@ -1,0 +1,55 @@
+﻿@model IEnumerable<_2Hours_Ver2.Product>
+
+@{
+    ViewBag.Title = "AdminProducts";
+}
+
+
+<p>
+    @Html.ActionLink("Add New", "AdminProductAdd", "Account", new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.producType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplierID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.producType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.supplierID)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.productID }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
