@@ -353,13 +353,11 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\UserArea.cshtml" />
     <Content Include="Views\Account\AdminOnly.cshtml" />
-    <Content Include="Views\Shared\_AdminProducts.cshtml" />
     <Content Include="Views\Shared\_AdminOrderDetails.cshtml" />
     <Content Include="Views\Shared\_AdminSuppliers.cshtml" />
     <Content Include="Views\Shared\_AdminViewUsers.cshtml" />
     <Content Include="Views\Shared\_UserOrderDetails.cshtml" />
     <Content Include="Views\Shared\_ProfileDetails.cshtml" />
-    <Content Include="Views\Account\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
