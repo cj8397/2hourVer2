@@ -363,6 +363,7 @@
     <Content Include="Views\Account\Details1.cshtml" />
     <Content Include="Views\Shared\_ProfileDetails.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Shared\_AdminProducts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

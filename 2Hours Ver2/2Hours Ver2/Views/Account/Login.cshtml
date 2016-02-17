@@ -13,6 +13,25 @@
 
     <div class="form-horizontal">
         <hr />
+
+        <table class="table">
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Authority</th>
+            </tr>
+            <tr>
+                <td>testadmin</td>
+                <td>testing</td>
+                <td>Admin</td>
+            </tr>
+            <tr>
+                <td>testuser</td>
+                <td>testing</td>
+                <td>User</td>
+            </tr>
+        </table>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })

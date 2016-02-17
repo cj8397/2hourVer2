@@ -22,20 +22,26 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About Us", "AboutUs", "Home")</li>
-                    <li>@Html.ActionLink("FAQ", "FAQ", "Home")</li>
                     <li>@Html.ActionLink("Shop Now", "ShopProducts", "Home")</li>
-                    <li>@Html.ActionLink("Contact Us", "ContactUs", "Home")</li>
+                
                     @{
                         if (Request.IsAuthenticated)
                         {
 
                             if (User.IsInRole("Admin"))
                             {
-                                <li>@Html.ActionLink("Administrators", "AdminOnly", "Account")</li>
+                                
+                                <li class="dropdown">
+                                    <a href="@Url.Action("AdminOnly", "Account")" data-toggle="dropdown">Administrators <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Admin Area", "AdminOnly", "Account")</li>
+                                        <li>@Html.ActionLink("Add New Role", "AddRole", "Account")</li>
+                                        <li>@Html.ActionLink("Assign User to Role", "AddUserToRole", "Account")</li>
+                                    </ul>
+                                </li>
                             }
 
-                            if (User.IsInRole("User"))
+                            if(User.IsInRole("User"))
                             {
                                 <li>@Html.ActionLink("User Area", "UserArea", "Account")</li>
                             }
@@ -64,10 +70,17 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 2hours.com</p>
-        </footer>
+
+        <div id="footer">
+            <footer>
+                @Html.ActionLink("About", "AboutUs", "Home") |
+                @Html.ActionLink("FAQ", "FAQ", "Home") |
+                @Html.ActionLink("Contact", "ContactUs", "Home")
+                <p>&copy; @DateTime.Now.Year - 2hours.com</p>
+            </footer>
+        </div>
     </div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
