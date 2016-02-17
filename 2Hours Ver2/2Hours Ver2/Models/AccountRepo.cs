@@ -22,7 +22,8 @@ namespace _2Hours_Ver2.Models
 
             db.SaveChanges();
             return aspNetUser;
-        }
+        }       
+
         public bool ValidLogin(Login login)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
