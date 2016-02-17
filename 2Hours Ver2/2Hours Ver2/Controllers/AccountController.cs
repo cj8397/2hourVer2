@@ -35,8 +35,8 @@ namespace _2Hours_Ver2.Controllers
 
             if (ModelState.IsValid)
             {
-                Account account = new Account();
-                if (account.ValidLogin(login))
+                AccountRepo accountRepo = new AccountRepo();
+                if (accountRepo.ValidLogin(login))
                 {
                     IAuthenticationManager authenticationManager
                                            = HttpContext.GetOwinContext().Authentication;

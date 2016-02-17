@@ -8,8 +8,21 @@ using System.Web;
 
 namespace _2Hours_Ver2.Models
 {
-    public class Account
+    public class AccountRepo
     {
+
+        public AspNetUser UpdateUser(string id, string phone, string userName)
+        {
+
+            mergedEntities db = new mergedEntities();
+            AspNetUser aspNetUser = db.AspNetUsers.Where(a => a.Id == id)
+                            .FirstOrDefault();
+            aspNetUser.PhoneNumber = phone;
+            aspNetUser.UserName = userName;
+
+            db.SaveChanges();
+            return aspNetUser;
+        }
         public bool ValidLogin(Login login)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
