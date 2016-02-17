@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "AdminOnly";
+}
+
+<h2>Administrators Area</h2>
+
+<img src="~/Content/imgs/admin.png" width="200" height="200" />
+
+<div class="jumbotron">
+    <p>This page is only visible to administrators.</p>
+</div>
+
+<div class="container">
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#orders">Orders</a></li>
+                <li><a data-toggle="tab" href="#products">Products</a></li>
+                <li><a data-toggle="tab" href="#suppliers">Suppliers</a></li>
+                <li><a data-toggle="tab" href="#users">Users</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="orders" class="tab-pane fade in active">
+                    <h3>Orders</h3>
+                    @Html.Partial("_AdminOrderDetails", TempData["orders"])
+
+                </div>
+                <div id="products" class="tab-pane fade">
+                    <h3>Products</h3>
+                    @Html.Partial("_AdminProducts", TempData["products"])
+                </div>
+                <div id="suppliers" class="tab-pane fade">
+                    <h3>Suppliers</h3>
+                    @Html.Partial("_AdminSuppliers", TempData["suppliers"])
+                </div>
+                <div id="users" class="tab-pane fade">
+                    <h3>Users</h3>
+                    @Html.Partial("_AdminViewUsers", TempData["users"])
+                </div>
+            </div>
+</div>
+
+
