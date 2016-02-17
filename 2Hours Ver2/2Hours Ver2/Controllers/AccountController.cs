@@ -31,7 +31,7 @@ namespace _2Hours_Ver2.Controllers
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             IdentityUser identityUser = manager.Find(login.UserName,
-                                                             login.Password);            
+                                                             login.Password);
             TempData["Login"] = login;
             if (ModelState.IsValid)
             {

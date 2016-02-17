@@ -13,7 +13,7 @@ namespace _2Hours_Ver2.Controllers
     {
         private const int DEFAULT_QTY = 1;
         private mergedEntities db = new mergedEntities();
-        private ProductRepo shoppingCart = new ProductRepo();
+        private ProductDetails shoppingCart = new ProductDetails();
         private Session session = new Session();
 
 
@@ -35,7 +35,7 @@ namespace _2Hours_Ver2.Controllers
         [HttpPost]
         public ActionResult Add(CartItem item)
         {
-            using (var shoppingCart = new ProductRepo())
+            using (var shoppingCart = new ProductDetails())
             {
                 if (ModelState.IsValid)
                 {
@@ -62,7 +62,7 @@ namespace _2Hours_Ver2.Controllers
             var order = new OrderDetails
             {
                 CartItems = items,
-                Tax = ProductRepo.TAX_RATE
+                Tax = ProductDetails.TAX_RATE
             };
 
             return View(order);

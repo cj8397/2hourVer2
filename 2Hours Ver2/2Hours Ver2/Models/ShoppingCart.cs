@@ -6,7 +6,7 @@ using System.Web;
 
 namespace _2Hours_Ver2.Models
 {
-    public class ProductRepo: IDisposable
+    public class ProductDetails: IDisposable
     {
         public const decimal TAX_RATE = 0.07m;
         private mergedEntities db = new mergedEntities();

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace _2Hours_Ver2.Models
 {
-    public class ProductRepo
+    public class ProductDetails
     {
         private mergedEntities db = new mergedEntities();
         public IQueryable<Product> GetAllProducts()
@@ -23,7 +23,7 @@ namespace _2Hours_Ver2.Models
             return products;
         }
 
-        public ProductRepo GetProduct(int productID)
+        public ProductDetails GetProduct(int productID)
         {
             var product = GetAllProducts()
                           .Where(pv => pv.ProductID == productID)
@@ -38,7 +38,7 @@ namespace _2Hours_Ver2.Models
             return product;
         }
 
-        public ProductRepo NewProduct(int productID, string productName)
+        public ProductDetails NewProduct(int productID, string productName)
         {
             StoreProduct(productID, productName);
             return GetProduct(productID);
@@ -55,22 +55,6 @@ namespace _2Hours_Ver2.Models
 
         }
 
-        public void UpdateProduct(int productID)
-        {
-            if (products != null)
-            {
-                foreach (var item in products)
-                {
-                    if (isValidItem(item.ProductID))
-                    {
-                        StoreProduct(item.ProductID, item.ProductName);
-                    }
-                }
-
-                db.SaveChanges();
-            }
-            return products;
-        }
 
         public Product UpdateProduct(int productID, string productName)
         {

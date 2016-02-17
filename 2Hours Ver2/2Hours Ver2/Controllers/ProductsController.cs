@@ -10,7 +10,7 @@ namespace _2Hours_Ver2.Controllers
     public class ProductsController : Controller
     {
         private mergedEntities db = new mergedEntities();
-        private ProductRepo productRepo = new ProductRepo();
+        private ProductDetails productRepo = new ProductDetails();
         private Product prod = new Product();
 
         public ActionResult Add(int productID, string productName)
@@ -26,7 +26,7 @@ namespace _2Hours_Ver2.Controllers
         [HttpPost]
         public ActionResult Add(Product product)
         {
-            using (var productRepo = new ProductRepo())
+            using (var productRepo = new ProductDetails())
             {
                 if (ModelState.IsValid)
                 {
