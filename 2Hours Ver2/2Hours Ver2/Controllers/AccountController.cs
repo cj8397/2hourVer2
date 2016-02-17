@@ -53,7 +53,17 @@ namespace _2Hours_Ver2.Controllers
                     {
                         IsPersistent = false
                     }, identity);
-                    return RedirectToAction("UserArea", "Account");
+                    if (identityUser.Roles.Count == 1)
+                    {
+
+                        return RedirectToAction("AdminOnly", "Account");
+
+                    }
+                    if (identityUser.Roles.Count == 0)
+                    {
+
+                        return RedirectToAction("UserArea", "Account");
+                    }
                 }
             }
             return View();
