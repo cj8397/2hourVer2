@@ -28,8 +28,7 @@ namespace _2Hours_Ver2.Models
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
-            IdentityUser identityUser = manager.Find(login.UserName,
-                                                             login.Password);
+            IdentityUser identityUser = manager.Find(login.UserName, login.Password);
             mergedEntities db = new mergedEntities();
             AspNetUser USER = new AspNetUser();
 
@@ -40,7 +39,8 @@ namespace _2Hours_Ver2.Models
             {
                 ID = a.Id,
                 UserName = a.UserName,
-                PhoneNumber = a.PhoneNumber,           
+                PhoneNumber = a.PhoneNumber,
+                Email = a.Email,           
             };
 
             foreach (var item in query)
@@ -48,6 +48,7 @@ namespace _2Hours_Ver2.Models
                 USER.Id = item.ID;
                 USER.UserName = item.UserName;
                 USER.PhoneNumber = item.PhoneNumber;
+                USER.Email = item.Email;
             }
 
             return USER;

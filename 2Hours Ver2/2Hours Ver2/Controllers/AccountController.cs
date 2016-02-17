@@ -32,7 +32,7 @@ namespace _2Hours_Ver2.Controllers
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             IdentityUser identityUser = manager.Find(login.UserName,
                                                              login.Password);
-            ViewBag.Login = login;
+            TempData["Login"] = login;
             if (ModelState.IsValid)
             {
                 AccountRepo accountRepo = new AccountRepo();
@@ -255,8 +255,10 @@ namespace _2Hours_Ver2.Controllers
         [Authorize]
         public ActionResult UserArea()
         {
+            AccountRepo accountRepo = new AccountRepo();
+            var login = TempData["Login"];
             TempData["orders"] = db.OrderDetails.ToList();
-            TempData["profile"] = db.AspNetUsers ;
+            TempData["profile"] = accountRepo.GetDetail((Login)login);
             return View();
         }
         [Authorize]
@@ -269,8 +271,10 @@ namespace _2Hours_Ver2.Controllers
         [Authorize]
         public ActionResult ProfileDetails()
         {
-
-            return PartialView("_ProfileDetails");
+            AccountRepo accountRepo = new AccountRepo();
+            var login = TempData["Login"];
+            AspNetUser aspNetUser = accountRepo.GetDetail((Login)login);
+            return PartialView("_ProfileDetails",aspNetUser);
         }
 
         [Authorize]
@@ -368,11 +372,7 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }
 
-        public ActionResult Details()
-        {
-            AccountRepo accountRepo = new AccountRepo();            
-            return View(accountRepo.GetDetail(ViewBag.Login));
-        }
+       
 
 
 
