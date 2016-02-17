@@ -32,10 +32,11 @@ namespace _2Hours_Ver2.Controllers
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             IdentityUser identityUser = manager.Find(login.UserName,
                                                              login.Password);
-
+            ViewBag.Login = login;
             if (ModelState.IsValid)
             {
-                if (ValidLogin(login))
+                AccountRepo accountRepo = new AccountRepo();
+                if (accountRepo.ValidLogin(login))
                 {
                     IAuthenticationManager authenticationManager
                                            = HttpContext.GetOwinContext().Authentication;
@@ -153,6 +154,10 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]        
         public ActionResult AdminOnly()
         {
+            TempData["orders"]    = db.OrderDetails.ToList();
+            TempData["products"]  = db.Products.ToList();
+            TempData["suppliers"] = db.Suppliers.ToList();
+            TempData["users"]     = db.AspNetUsers.ToList();
             return View();
         }
 
@@ -160,14 +165,7 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult AdminOrderDetails()
         {
             var details = db.OrderDetails.ToList();
-            return View(details);
-        }
-
-        [Authorize(Roles = "Admin")]
-        public ActionResult AdminOrders()
-        {
-            var orders = db.OrderProducts.ToList();
-            return View(orders);
+            return PartialView("_AdminOrderDetails",details);
         }
 
         [Authorize(Roles = "Admin")]
@@ -180,7 +178,7 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult AdminProducts()
         {
             var products = db.Products.ToList();
-            return View(products);
+            return PartialView("_AdminProducts",products);
         }
 
         [Authorize(Roles = "Admin")]
@@ -257,67 +255,28 @@ namespace _2Hours_Ver2.Controllers
         [Authorize]
         public ActionResult UserArea()
         {
+            TempData["orders"] = db.OrderDetails.ToList();
+            TempData["profile"] = db.AspNetUsers ;
             return View();
         }
-
         [Authorize]
-        public ActionResult UpdateProfile()
+        public ActionResult UserOrderDetails()
         {
-
-            return View();
+            var details = db.OrderDetails.ToList();
+            return PartialView("_UserOrderDetails", details);
         }
 
         [Authorize]
         public ActionResult ProfileDetails()
         {
-            return View();
+
+            return PartialView("_ProfileDetails");
         }
 
         [Authorize]
         public ActionResult PasswordReset()
         {
             return View();
-        }
-
-        bool ValidLogin(Login login)
-        {
-            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(userStore)
-            {
-                UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 1, 0),
-                MaxFailedAccessAttemptsBeforeLockout = 3
-            };
-            var user = userManager.FindByName(login.UserName);
-
-            if (user == null)
-                return false;
-
-            // User is locked out.
-            if (userManager.SupportsUserLockout && userManager.IsLockedOut(user.Id))
-                return false;
-
-            // Validated user was locked out but now can be reset.
-            if (userManager.CheckPassword(user, login.Password)
-                      && userManager.IsEmailConfirmed(user.Id))
-
-            {
-                if (userManager.SupportsUserLockout
-                 && userManager.GetAccessFailedCount(user.Id) > 0)
-                {
-                    userManager.ResetAccessFailedCount(user.Id);
-                }
-            }
-            // Login is invalid so increment failed attempts.
-            else {
-                bool lockoutEnabled = userManager.GetLockoutEnabled(user.Id);
-                if (userManager.SupportsUserLockout && userManager.GetLockoutEnabled(user.Id))
-                {
-                    userManager.AccessFailed(user.Id);
-                    return false;
-                }
-            }
-            return true;
         }
 
         const string EMAIL_CONFIRMATION = "EmailConfirmation";
@@ -343,7 +302,7 @@ namespace _2Hours_Ver2.Controllers
             }
             catch
             {
-                ViewBag.Message = "<p class='alert alert-danger>Error! Validation attempt failed.</p>";
+                ViewBag.Message = "<p class='alert alert-danger'>Error! Validation attempt failed.</p>";
             }
             return View();
         }
@@ -407,6 +366,12 @@ namespace _2Hours_Ver2.Controllers
             else
                 ViewBag.Result = "<p class='alert alert-danger'>Error! Your password has not been reset.</p>";
             return View();
+        }
+
+        public ActionResult Details()
+        {
+            AccountRepo accountRepo = new AccountRepo();            
+            return View(accountRepo.GetDetail(ViewBag.Login));
         }
 
 
