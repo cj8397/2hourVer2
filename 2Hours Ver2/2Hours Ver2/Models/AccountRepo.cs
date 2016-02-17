@@ -5,6 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Microsoft.Owin.Security;
+using System.Security.Claims;
+using _2Hours_Ver2.BusinessLogic;
+
 
 namespace _2Hours_Ver2.Models
 {
