@@ -35,7 +35,8 @@ namespace _2Hours_Ver2.Controllers
 
             if (ModelState.IsValid)
             {
-                if (ValidLogin(login))
+                Account account = new Account();
+                if (account.ValidLogin(login))
                 {
                     IAuthenticationManager authenticationManager
                                            = HttpContext.GetOwinContext().Authentication;
@@ -278,47 +279,6 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }
 
-        bool ValidLogin(Login login)
-        {
-            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(userStore)
-            {
-                UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 1, 0),
-                MaxFailedAccessAttemptsBeforeLockout = 3
-            };
-            var user = userManager.FindByName(login.UserName);
-
-            if (user == null)
-                return false;
-
-            // User is locked out.
-            if (userManager.SupportsUserLockout && userManager.IsLockedOut(user.Id))
-                return false;
-
-            // Validated user was locked out but now can be reset.
-            if (userManager.CheckPassword(user, login.Password)
-                      && userManager.IsEmailConfirmed(user.Id))
-
-            {
-                if (userManager.SupportsUserLockout
-                 && userManager.GetAccessFailedCount(user.Id) > 0)
-                {
-                    userManager.ResetAccessFailedCount(user.Id);
-                }
-            }
-            // Login is invalid so increment failed attempts.
-            else {
-                bool lockoutEnabled = userManager.GetLockoutEnabled(user.Id);
-                if (userManager.SupportsUserLockout && userManager.GetLockoutEnabled(user.Id))
-                {
-                    userManager.AccessFailed(user.Id);
-                    return false;
-                }
-            }
-            return true;
-        }
-
         const string EMAIL_CONFIRMATION = "EmailConfirmation";
         const string PASSWORD_RESET = "ResetPassword";
 
@@ -342,7 +302,7 @@ namespace _2Hours_Ver2.Controllers
             }
             catch
             {
-                ViewBag.Message = "<p class='alert alert-danger>Error! Validation attempt failed.</p>";
+                ViewBag.Message = "<p class='alert alert-danger'>Error! Validation attempt failed.</p>";
             }
             return View();
         }
