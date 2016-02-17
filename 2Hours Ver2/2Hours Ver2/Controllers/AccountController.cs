@@ -153,6 +153,10 @@ namespace _2Hours_Ver2.Controllers
         [Authorize(Roles = "Admin")]        
         public ActionResult AdminOnly()
         {
+            TempData["orders"]    = db.OrderDetails.ToList();
+            TempData["products"]  = db.Products.ToList();
+            TempData["suppliers"] = db.Suppliers.ToList();
+            TempData["users"]     = db.AspNetUsers.ToList();
             return View();
         }
 
@@ -160,14 +164,7 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult AdminOrderDetails()
         {
             var details = db.OrderDetails.ToList();
-            return View(details);
-        }
-
-        [Authorize(Roles = "Admin")]
-        public ActionResult AdminOrders()
-        {
-            var orders = db.OrderProducts.ToList();
-            return View(orders);
+            return PartialView("_AdminOrderDetails",details);
         }
 
         [Authorize(Roles = "Admin")]
@@ -180,7 +177,7 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult AdminProducts()
         {
             var products = db.Products.ToList();
-            return View(products);
+            return PartialView("_AdminProducts",products);
         }
 
         [Authorize(Roles = "Admin")]
@@ -257,20 +254,22 @@ namespace _2Hours_Ver2.Controllers
         [Authorize]
         public ActionResult UserArea()
         {
+            TempData["orders"] = db.OrderDetails.ToList();
+            TempData["profile"] = db.AspNetUsers ;
             return View();
         }
-
         [Authorize]
-        public ActionResult UserProfile()
+        public ActionResult UserOrderDetails()
         {
-
-            return View();
+            var details = db.OrderDetails.ToList();
+            return PartialView("_UserOrderDetails", details);
         }
 
         [Authorize]
         public ActionResult ProfileDetails()
         {
-            return View();
+
+            return PartialView("_ProfileDetails");
         }
 
         [Authorize]
