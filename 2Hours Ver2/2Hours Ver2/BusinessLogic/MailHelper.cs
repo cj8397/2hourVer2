@@ -9,9 +9,7 @@ namespace _2Hours_Ver2.BusinessLogic
 {
     public class MailHelper
     {
-        public const string SUCCESS
-= "A confimationn email has been sent. Please confirm it in your email to complete the process.";
-
+        public const string SUCCESS = "A confimationn email has been sent. Please check your email!";
         public const string FAILURE = "Failure sending mail.";
 
         //const string TO = "hassanhosseinpoor@yahoo.com"; // Specify where you want this email sent.
@@ -33,7 +31,7 @@ namespace _2Hours_Ver2.BusinessLogic
             {
                 MailMessage mailMsg = new MailMessage(FROM, TO);
                 mailMsg.Subject = "Confirmation Email for " + registeredUser.UserName;
-                mailMsg.Body = registeredUser.ConfirmLink + "<br/>sent by: " + registeredUser.Email;
+                mailMsg.Body = registeredUser.ConfirmLink + "<br/>Sent by: 2Hours Inc" ;
                 mailMsg.IsBodyHtml = USE_HTML;
 
                 SmtpClient smtp = new SmtpClient();
