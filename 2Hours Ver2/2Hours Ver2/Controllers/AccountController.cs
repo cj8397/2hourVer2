@@ -53,15 +53,13 @@ namespace _2Hours_Ver2.Controllers
                     {
                         IsPersistent = false
                     }, identity);
+                    
                     if (identityUser.Roles.Count == 1)
-                    {
-
+                    {                        
                         return RedirectToAction("AdminOnly", "Account");
-
                     }
                     if (identityUser.Roles.Count == 0)
-                    {
-
+                    {                        
                         return RedirectToAction("UserArea", "Account");
                     }
                 }
@@ -158,8 +156,6 @@ namespace _2Hours_Ver2.Controllers
             db.SaveChanges();
             return View();
         }
-
-
 
         [Authorize(Roles = "Admin")]        
         public ActionResult AdminOnly()
@@ -258,10 +254,8 @@ namespace _2Hours_Ver2.Controllers
         {
             return View();
         }
-        
-        
+              
         // Admin and customer have permission to go to these pages.
-
         [Authorize]
         public ActionResult UserArea()
         {
@@ -381,8 +375,20 @@ namespace _2Hours_Ver2.Controllers
                 ViewBag.Result = "<p class='alert alert-danger'>Error! Your password has not been reset.</p>";
             return View();
         }
+        public ActionResult Details()
+        {           
+            return View();
+        }
+        public ActionResult Create()
+        {            
+            return View();
+        }
+        public ActionResult Update()
+        {
+            return View();
+        }
 
-       
+
 
 
 
