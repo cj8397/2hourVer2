@@ -16,3 +16,61 @@ textarea {
     max-width: 280px;
 }
 
+.navbar.navbar-inverse {
+    border: none;
+    padding-top: 5px;
+    text-align: center;
+    background-color: #269546;
+   border-color: antiquewhite;
+}
+
+div.navbar-inverse .navbar-nav>li>a{ 
+    color: white;
+    padding-left: 5px;
+}
+
+
+.jumbotron{
+    text-align: center;
+    /*background-image: url('../../Content/img/banner-img1.jpg');*/
+    background-image: url('imgs/Ecologically_grown_vegetables.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 313px;
+    font-size: 2em;
+}
+
+.jumbotron h2{
+    color: white;
+}
+
+#welcome{
+    color:white;
+}
+.navbar.navbar-inverse {
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: #269546;
+    color: #fff;
+    text-align: center;
+    clear: both;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding-bottom: 15px;
+    right: 0;
+    position:fixed;
+}
+
+    footer p {
+        margin: 0;
+        padding-top: 10px;
+        font-size: 0.9em;
+    }
+
+    footer > a {
+        color: white;
+        padding: 10px 15px;
+    }
