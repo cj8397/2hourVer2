@@ -18,7 +18,7 @@ namespace _2Hours_Ver2.Controllers
     public class AccountController : Controller
     {
         private mergedEntities db = new mergedEntities();
-        
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -33,10 +33,10 @@ namespace _2Hours_Ver2.Controllers
             IdentityUser identityUser = manager.Find(login.UserName,
                                                              login.Password);
             TempData["Login"] = login;
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 AccountRepo accountRepo = new AccountRepo();
-                if (accountRepo.ValidLogin(login))
+                if(accountRepo.ValidLogin(login))
                 {
                     IAuthenticationManager authenticationManager
                                            = HttpContext.GetOwinContext().Authentication;
@@ -53,13 +53,14 @@ namespace _2Hours_Ver2.Controllers
                     {
                         IsPersistent = false
                     }, identity);
-                    if (identityUser.Roles.Count == 1)
+
+                    if(identityUser.Roles.Count == 1)
                     {
 
                         return RedirectToAction("AdminOnly", "Account");
 
                     }
-                    if (identityUser.Roles.Count == 0)
+                    else //(identityUser.Roles.Count == 0)
                     {
 
                         return RedirectToAction("UserArea", "Account");
@@ -75,8 +76,9 @@ namespace _2Hours_Ver2.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisteredUser newUser) {
-            var userStore         = new UserStore<IdentityUser>();
+        public ActionResult Register(RegisteredUser newUser)
+        {
+            var userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
             {
                 UserLockoutEnabledByDefault = true,
@@ -84,11 +86,15 @@ namespace _2Hours_Ver2.Controllers
                 MaxFailedAccessAttemptsBeforeLockout = 3
             };
 
-            var identityUser      = new IdentityUser() { UserName = newUser.UserName, 
-                                                         Email    = newUser.Email };
+            var identityUser = new IdentityUser()
+            {
+                UserName = newUser.UserName,
+                Email = newUser.Email
+            };
             IdentityResult result = manager.Create(identityUser, newUser.Password);
 
-            if (result.Succeeded) {
+            if(result.Succeeded)
+            {
                 CreateTokenProvider(manager, EMAIL_CONFIRMATION);
 
                 var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
@@ -98,24 +104,28 @@ namespace _2Hours_Ver2.Controllers
 
                 string link = "Please confirm your account by clicking this link: <a href=\""
                                 + callbackUrl + "\">Confirm Registration</a>";
-                newUser.ConfirmLink = link;                
+                newUser.ConfirmLink = link;
                 // sending Email Start
                 MailHelper mailer = new MailHelper();
                 string response = mailer.EmailFromArvixe(
-                                           new RegisteredUser(newUser.Email, newUser.UserName,newUser.ConfirmLink ));
-                
-                if (response != "Failure sending mail."){
+                                           new RegisteredUser(newUser.Email, newUser.UserName, newUser.ConfirmLink));
+
+                if(response != "Failure sending mail.")
+                {
                     ViewBag.Success = response;
-                }else{
+                }
+                else
+                {
                     ViewBag.Failure = response;
                 }
 
                 // sending Email End
             }
             return View();
-            }
+        }
         [Authorize]
-        public ActionResult Welcome(string name) {
+        public ActionResult Welcome(string name)
+        {
             //ViewBag.UserName = name;
             return View();
         }
@@ -161,13 +171,13 @@ namespace _2Hours_Ver2.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]        
+        [Authorize(Roles = "Admin")]
         public ActionResult AdminOnly()
         {
-            TempData["orders"]    = db.OrderDetails.ToList();
-            TempData["products"]  = db.Products.ToList();
+            TempData["orders"] = db.OrderDetails.ToList();
+            TempData["products"] = db.Products.ToList();
             TempData["suppliers"] = db.Suppliers.ToList();
-            TempData["users"]     = db.AspNetUsers.ToList();
+            TempData["users"] = db.AspNetUsers.ToList();
             return View();
         }
 
@@ -175,7 +185,7 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult AdminOrderDetails()
         {
             var details = db.OrderDetails.ToList();
-            return PartialView("_AdminOrderDetails",details);
+            return PartialView("_AdminOrderDetails", details);
         }
 
         [Authorize(Roles = "Admin")]
@@ -188,7 +198,7 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult AdminProducts()
         {
             var products = db.Products.ToList();
-            return PartialView("_AdminProducts",products);
+            return PartialView("_AdminProducts", products);
         }
 
         [Authorize(Roles = "Admin")]
@@ -258,8 +268,8 @@ namespace _2Hours_Ver2.Controllers
         {
             return View();
         }
-        
-        
+
+
         // Admin and customer have permission to go to these pages.
 
         [Authorize]
@@ -284,7 +294,7 @@ namespace _2Hours_Ver2.Controllers
             AccountRepo accountRepo = new AccountRepo();
             var login = TempData["Login"];
             AspNetUser aspNetUser = accountRepo.GetDetail((Login)login);
-            return PartialView("_ProfileDetails",aspNetUser);
+            return PartialView("_ProfileDetails", aspNetUser);
         }
 
         [Authorize]
@@ -311,7 +321,7 @@ namespace _2Hours_Ver2.Controllers
             try
             {
                 IdentityResult result = manager.ConfirmEmail(userID, code);
-                if (result.Succeeded)
+                if(result.Succeeded)
                     ViewBag.Message = "<p class='alert alert-success'>Success! You are now registered.</p>";
             }
             catch
@@ -346,11 +356,12 @@ namespace _2Hours_Ver2.Controllers
             MailHelper mailer = new MailHelper();
             string response = mailer.EmailFromArvixe(
                                        new RegisteredUser(email, PASSWORD_RESET, link));
-            if (response != "Failure sending mail.")
+            if(response != "Failure sending mail.")
             {
                 ViewBag.Success = response;
             }
-            else {
+            else
+            {
                 ViewBag.Failure = response;
             }
 
@@ -375,16 +386,12 @@ namespace _2Hours_Ver2.Controllers
             CreateTokenProvider(manager, PASSWORD_RESET);
 
             IdentityResult result = manager.ResetPassword(userID, passwordToken, password);
-            if (result.Succeeded)
+            if(result.Succeeded)
                 ViewBag.Result = "<p class='alert alert-success'>Success! Your password has been reset.</p>";
             else
                 ViewBag.Result = "<p class='alert alert-danger'>Error! Your password has not been reset.</p>";
             return View();
         }
-
-       
-
-
 
     }//end account controller
 }

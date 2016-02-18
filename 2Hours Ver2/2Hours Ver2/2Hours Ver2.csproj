@@ -325,7 +325,7 @@
     <Compile Include="ViewModels\OrderDetails.cs" />
     <Compile Include="ViewModels\Login.cs" />
     <Compile Include="ViewModels\Product.cs" />
-    <Compile Include="ViewModels\RegisteredUser.cs" />
+    <Compile Include="obj\RegisteredUser.cs" />
     <Compile Include="ViewModels\UserRole.cs" />
     <Compile Include="ViewModels\Message.cs" />
     <Compile Include="Visit.cs">
