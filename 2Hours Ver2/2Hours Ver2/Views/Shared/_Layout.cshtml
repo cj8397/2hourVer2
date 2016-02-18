@@ -31,10 +31,18 @@
 
                             if (User.IsInRole("Admin"))
                             {
-                                <li>@Html.ActionLink("Administrators", "AdminOnly", "Account")</li>
+                                
+                                <li class="dropdown">
+                                    <a href="@Url.Action("AdminOnly", "Account")" data-toggle="dropdown">Administrators <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Admin Area", "AdminOnly", "Account")</li>
+                                        <li>@Html.ActionLink("Add New Role", "AddRole", "Account")</li>
+                                        <li>@Html.ActionLink("Assign User to Role", "AddUserToRole", "Account")</li>
+                                    </ul>
+                                </li>
                             }
 
-                            if (User.IsInRole("User"))
+                            if(User.IsInRole("User"))
                             {
                                 <li>@Html.ActionLink("User Area", "UserArea", "Account")</li>
                             }
@@ -68,12 +76,16 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+        <hr />
+
+        <div id="footer">
         <footer>
             @Html.ActionLink("About Us", "AboutUs", "Home") | 
             @Html.ActionLink("FAQ", "FAQ", "Home") | 
             @Html.ActionLink("Contact Us", "ContactUs", "Home")
             <p>&copy; @DateTime.Now.Year - 2hours.com</p>
         </footer>
+    </div>
     </div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
