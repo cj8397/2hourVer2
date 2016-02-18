@@ -17,13 +17,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("2hours", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/Content/imgs/2_logo.png" width="50"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Shop Now", "ShopProducts", "Home")</li>
-                
+                    <li>@Html.ActionLink("Shop", "ShopProducts", "Home")</li>
+        
                     @{
                         if (Request.IsAuthenticated)
                         {
@@ -68,19 +69,23 @@
             </div>
         </div>
     </div>
+    <div class="jumbotron">
+        <h1 id="welcome">Welcome to 2 hours! </h1>
+        <h2>Start grocecery shopping today with us!</h2>
+        @Html.ActionLink("Shop Now", "ShopProducts", "Home", new { @class = "btn btn-warning" })
+    </div>
     <div class="container body-content">
         @RenderBody()
-
         <hr />
 
         <div id="footer">
-            <footer>
-                @Html.ActionLink("About", "AboutUs", "Home") |
-                @Html.ActionLink("FAQ", "FAQ", "Home") |
-                @Html.ActionLink("Contact", "ContactUs", "Home")
-                <p>&copy; @DateTime.Now.Year - 2hours.com</p>
-            </footer>
-        </div>
+        <footer>
+            @Html.ActionLink("About Us", "AboutUs", "Home") | 
+            @Html.ActionLink("FAQ", "FAQ", "Home") | 
+            @Html.ActionLink("Contact Us", "ContactUs", "Home")
+            <p>&copy; @DateTime.Now.Year - 2hours.com</p>
+        </footer>
+    </div>
     </div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
