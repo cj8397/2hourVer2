@@ -6,6 +6,20 @@
 
 <h2>Shop Products</h2>
 
+<div class="pull_right">
+    @using (Ajax.BeginForm("Index", "Home", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults"}, new{ @class = "navbar__search pull-left", novalidate = "novalidate" }))
+    {
+        <input required="required" placeholder="Search for Product " name="search" value="" type="search" class="search">
+        <button type="submit" class="navbar__search__icon" title="Search" data-track-action="navbar" data-track-label="searchicon">
+            <i class="fa fa-search"></i>
+        </button>
+    }
+</div>
+
+<div id="searchResults">
+
+</div>
+
 <table class="table">
     <tr>
         <th></th>

@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - 2hours.com</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -21,17 +22,20 @@
                     <img src="~/Content/imgs/2_logo.png" width="50"></a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav ">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Shop", "ShopProducts", "Home")</li>
-        
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
                     @{
                         if (Request.IsAuthenticated)
                         {
 
                             if (User.IsInRole("Admin"))
                             {
-                                
+
                                 <li class="dropdown">
                                     <a href="@Url.Action("AdminOnly", "Account")" data-toggle="dropdown">Administrators <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -52,7 +56,7 @@
                         }
                         else
                         {
-                                <li><a href="@Url.Action("Login", "Account")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li><a href="@Url.Action("Login", "Account")"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         }
 
                     }
@@ -66,6 +70,7 @@
                         </a>
                     </li>
                 </ul>
+
             </div>
         </div>
     </div>

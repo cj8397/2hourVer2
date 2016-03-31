@@ -34,14 +34,21 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }
 
-        public ActionResult Search(string searchString)
+        [HttpPost]
+        public ActionResult Index(string search)
         {
-            //Products product = new Products();
-            //IEnumerable<ProductSearch> products = product.GetAllProducts(searchString);
+            var product = db.Products
+                .Where(x => x.productName.StartsWith(search)) && db.Categories.Where( y => y.productType.StartsWith(search)
+                        || search == null
+                        || x.productName.Contains(search) // search by productName
+                        || y.productType.Contains(search) // search by productType
+                        );
 
-            //// Store current search and sort filter parameters.
-            //ViewBag.CurrentFilter = searchString;
-            return View(/*products*/);
+            
+
+            ViewBag.search = true;
+
+            return View("ShopProducts", product);
         }
 
 
