@@ -1,0 +1,128 @@
+﻿@model _2Hours_Ver2.ViewModels.OrderDetails
+
+@{
+    ViewBag.Title = "ViewCart";
+}
+
+@if (Model.CartItems.Any() == false)
+{
+    <div class="container">
+        <h2>Your shopping cart is empty.</h2>
+    </div>
+}
+else {
+    using (Html.BeginForm("ViewCart", "Cart", FormMethod.Post, new { name = "viewCart", novalidate = "novalidate" }))
+    {
+        <div class="col-sm-12 col-sx-12">
+            <table class="table">
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CartItems.SingleOrDefault().ProductID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CartItems.SingleOrDefault().ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CartItems.SingleOrDefault().Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CartItems.SingleOrDefault().Quantity)
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+                @{
+                    var counter = 0;
+                }
+
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/Content/imgs/img[@item.ProductID].jpg" width="200" height="200" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductID)
+                            <input type="hidden" name="CartItem[@counter].ProductID" value="@item.ProductID " />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                            <input type="hidden" name="CartItem[@counter].ProductName" value="@item.ProductName " />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                            <input type="hidden" name="CartItem[@counter].Price" value="@item.Price " />
+                        </td>
+                        <td>
+                            <input class="text-box single-line"
+                                   @*data-ng-model="CartItem[@counter].Quantity"*@
+                                   id="CartItem[@counter].Quantity"
+                                   name="CartItem[@counter].Quantity"
+                                   type="number" min="1" value="@item.Quantity"
+                                   data-val-number="The field Quantity must be a number."
+                                   data-val-range="Quantity must be greater than zero."
+                                   data-val-range-max="2147483647" data-val-range-min="1"
+                                   data-val-regex="Quantity must be a valid number."
+                                   data-val-regex-pattern="^[1-9]\d*(,\d+)?$"
+                                   data-val-required="The Quantity field is required."
+                                   data-val="true">
+                            <span data-valmsg-for="CartItem[@counter].Quantity" data-valmsg-replace="true"></span>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("RemoveItem", "Cart", new { productID = item.ProductID })">
+                                <span class='glyphicon glyphicon-remove-circle' data-toggle="tooltip" title="Remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+
+                    counter++;
+                }<!--End foreach-->
+
+            </table>
+        </div>
+
+        <input type="submit" value="Save Order" class="btn btn-default" data-toggle="tooltip" title="Save Order" />
+                    }<!--End save order form-->
+                    using (Html.BeginForm("CancelOrder", "Cart", FormMethod.Post))
+                    {
+                        <input name="cancel" type="submit" value="Cancel Order" class="btn btn-default" data-toggle="tooltip" title="Cancel Order" />
+                    }<!--End cancel form-->
+
+                    <div class="cart-footer form-group col-lg-5 col-md-5 col-sm-5 col-xs-4 pull-right">
+                        <div class="order-totals-table">
+                            <table>
+                                <tbody>
+                                    <tr class="order-subtotal">
+                                        <td><strong>   @Html.DisplayNameFor(m => m.SubTotal):  </strong> </td>
+                                        <td class="pull-right"> @Model.SubTotal.ToString("C2")</td>
+                                    </tr>
+
+                                    <tr class="order-sales-tax">
+                                        <td><strong> + 7%   @Html.DisplayNameFor(m => m.Tax):  </strong></td>
+                                        <td class="pull-right">@Model.Tax.ToString("C2") </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr />
+                        <div class="order-totals-summary">
+                            <table>
+                                <tbody>
+                                    <tr class="order-total">
+                                        <td> <strong>@Html.DisplayNameFor(m => m.Total):  </strong></td>
+                                        <td class="pull-right">
+                                            @Model.Total.ToString("C2")
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        @*@Html.ActionLink("Checkout", "ThankYou", "Cart", new { @class = "btn btn-default" })*@
+                        @Html.ActionLink("Checkout", "Login", "Home")
+                    </div>
+                    }<!--End else-->
+

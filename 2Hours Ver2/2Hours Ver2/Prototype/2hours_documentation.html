@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2 hours Documentation</title>
+</head>
+<body>
+<ul>
+	<li><a href="index.html">Home</a></li>
+	<li><a href="AboutUs.html">About Us</a></li>
+	<li><a href="FAQ.html">FAQ</a></li>
+	<li><a href="Shop.html">Shop</a></li>
+	<li><a href="AddCart.html">Shopping Cart</a></li>
+	<li><a href="ContactUs.html">Contact Us</a></li>
+	<li><a href="login.html">Login</a></li>
+</ul>
+
+<h2>Revenue Generation</h2>
+	<p>2hours will generate most of it's revenue from delivery charges based on the amount each customer
+		purchase and potentially charging a monthly subscription fee in the future, if there is substantial
+		client base.</p>
+	<p>
+		We will also look sponsorships from local and foreign suppliers to help distribute their products
+		through our websites.
+	</p>
+<h2>Functional Requirements</h2>
+	<h3>USER</h3>
+	<ul>
+		<li>Able to search a specific type of food and the system will display the relevant items</li>
+		<li>System will send confirmation email after a new user has register with the website </li>
+		<li>System will confirm payment authorization and notify customer payment has been successful or not</li>
+		<li>Users are able to create and edit account and profile info</li>
+		<li>Checkout should accept all types of credit cards</li>
+		<li>User are able to view order history and cancel un-delivered orders</li>
+		<li>System should allow users to reset password after user has been verified</li>
+	</ul>
+<h3>ADMIN</h3>
+	<ul>
+		<li>Admins can create, update and delete any products, users and orders</li>
+		<li>Admins can add and delete suppliers</li>
+	</ul>
+<h2>Non-Functional Requirements</h2>
+<h3>USER</h3>
+<ul>
+	<li>Code Platform: ASP.NET with MVC</li>
+	<li>Database: SQL server</li>
+	<li>Scripts: jQuery, Javascript, HTML, CSS</li>
+	<li>Framework: Twitter Bootstrap</li>
+	<li>O/S: Windows</li>
+</ul>
+
+<h2>USE Case Diagram</h2>
+	<img src="./Images/2%20hours_usercase.jpg" width="1000" height="1000">
+<h2>SQL Script</h2>
+	<textarea name="SQL" rows="100" cols="100">
+		
+        IF OBJECT_ID('OrderProduct')
+        IS NOT NULL DROP TABLE OrderProduct;
+        IF OBJECT_ID('OrderDetail')
+        IS NOT NULL DROP TABLE OrderDetail;
+        IF OBJECT_ID('Visit')
+        IS NOT NULL DROP TABLE Visit;
+        IF OBJECT_ID('Product')
+        IS NOT NULL DROP TABLE Product;
+        IF OBJECT_ID('Supplier')
+        IS NOT NULL DROP TABLE Supplier;
+        IF OBJECT_ID('Category')
+        IS NOT NULL DROP TABLE Category;
+
+        CREATE TABLE Category (
+        productType VARCHAR(20)PRIMARY KEY,
+        );
+        GO
+
+        INSERT INTO Category VALUES('Vegetable');
+        INSERT INTO Category VALUES('Meat');
+        INSERT INTO Category VALUES('Fruit');
+        GO
+
+        CREATE TABLE Supplier (
+        supplierID INT IDENTITY(10000, 1) PRIMARY KEY,
+        supplierName VARCHAR(50),
+        supplierAddress VARCHAR(100),
+        email VARCHAR(100),
+        phone VARCHAR(20),
+        );
+        GO
+
+        INSERT INTO Supplier VALUES('Safeway', '111 one st, Toronto', 'one@safeway.net', '905-222-1111');
+        INSERT INTO Supplier VALUES('Walmart', '222 two st, PoCo', 'two@walmart.net', '604-222-1111');
+        INSERT INTO Supplier VALUES('Superstore', '333 three st, Vancouver', 'three@superstore.net', '778-222-1111');
+        GO
+
+        CREATE TABLE Product (
+        productID INT NOT NULL PRIMARY KEY,
+        productName VARCHAR(20),
+        unit VARCHAR(5),
+        price MONEY CHECK(price > 0),
+        producType VARCHAR(20) FOREIGN KEY REFERENCES Category(productType),
+        supplierID INT FOREIGN KEY REFERENCES Supplier(supplierID),
+        );
+        GO
+
+        INSERT INTO Product VALUES(1, 'Tomato', 'lb', 1, 'Vegetable', 10000);
+        INSERT INTO Product VALUES(2, 'Short Ribs', 'lb', 6, 'Meat', 10001);
+        INSERT INTO Product VALUES(3, 'Grapes', 'pc', 2, 'Fruit', 10002);
+        GO
+
+        CREATE TABLE Visit (
+        sessionID VARCHAR(44) PRIMARY KEY,
+        started DATETIME
+        );
+        GO
+
+        INSERT INTO Visit VALUES('aaa111', '2015-1-1 12:00');
+        INSERT INTO Visit VALUES('bbb222', '2015-1-1 12:00');
+        INSERT INTO Visit VALUES('ccc333', '2015-1-1 12:00');
+
+        CREATE TABLE OrderDetail (
+        orderNumber INT IDENTITY(1000, 1),
+        orderDate DATETIME,
+        deliveryTime DATETIME,
+        deliveryStatus BIT,
+        totalPrice MONEY CHECK( totalPrice > 0),
+        PRIMARY KEY (orderNumber),
+        Id NVARCHAR(128) FOREIGN KEY REFERENCES AspNetUsers(Id),
+        );
+        GO
+
+        INSERT INTO OrderDetail VALUES ('2015-1-1 12:00', '2015-1-2 12:00',  0, 24.5, '9378f7c9-ddaf-466d-b4d2-d89eec1244ce');
+        INSERT INTO OrderDetail VALUES ('2015-12-1 12:00', '2015-1-3 12:00',  1, 95, '9378f7c9-ddaf-466d-b4d2-d89eec1244ce');
+        INSERT INTO OrderDetail VALUES ('2015-3-1 12:00', '2015-4-4 12:00',  0, 48.4, '9378f7c9-ddaf-466d-b4d2-d89eec1244ce');
+
+
+        CREATE TABLE OrderProduct (
+        sessionID VARCHAR(44) NOT NULL,
+        productID INT NOT NULL,
+        quantity DECIMAL,
+        updatedSession DATETIME,
+        PRIMARY KEY (sessionID, productID),
+        orderNumber INT FOREIGN KEY REFERENCES OrderDetail(orderNumber),
+        FOREIGN KEY (sessionID) REFERENCES Visit(sessionID),
+        FOREIGN KEY (productID) REFERENCES Product(productID),
+        );
+        GO
+
+        INSERT INTO OrderProduct VALUES ('aaa111', 1, 20, '2015-1-2 12:00', 1000);
+        INSERT INTO OrderProduct VALUES ('bbb222', 2, 8, '2015-1-2 12:00', 1001);
+        INSERT INTO OrderProduct VALUES ('ccc333', 3, 19,'2015-1-2 12:00', 1002);
+        GO
+	</textarea>
+<h2>ERD Diagram</h2>
+    <img src="Images/UpdatedERD2.JPG" width="1200" height="860">
+
+<h2>API (jSON)</h2>
+    <p>
+        For JSON API, we will implement a search engine within our admin login to search for any particular product, supplier and user!
+        The search will return a JSON string which we will interpret and display appropriately.
+    </p>
+</body>
+</html>

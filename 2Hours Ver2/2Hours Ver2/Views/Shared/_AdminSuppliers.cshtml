@@ -1,0 +1,48 @@
+﻿@model IEnumerable<_2Hours_Ver2.Supplier>
+
+@{
+    ViewBag.Title = "AdminSuppliers";
+}
+
+
+<p>
+    @Html.ActionLink("Add New", "Create", "Account", new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.supplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.supplierAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplierName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.supplierAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.supplierID }, new { @class = "btn btn-default" }) 
+        </td>
+    </tr>
+}
+
+</table>

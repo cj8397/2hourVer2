@@ -1,0 +1,50 @@
+﻿@model IEnumerable<_2Hours_Ver2.OrderDetail>
+
+@{
+    ViewBag.Title = "AdminOrderDetails";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.orderNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.orderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deliveryTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deliveryStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deliveryTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deliveryStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", "Account", new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
