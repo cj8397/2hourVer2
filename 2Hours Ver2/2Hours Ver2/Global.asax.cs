@@ -23,6 +23,9 @@ namespace _2Hours_Ver2
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AntiForgeryConfig.SuppressIdentityHeuristicChecks = true;
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings
+            .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            AreaRegistration.RegisterAllAreas();
 
         }
 

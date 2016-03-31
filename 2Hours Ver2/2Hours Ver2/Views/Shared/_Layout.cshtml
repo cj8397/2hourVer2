@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - 2hours.com</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -25,6 +26,9 @@
                     <li>Ver Date: 03/31/16</li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Shop", "ShopProducts", "Home")</li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
         
                     @{
                         if (Request.IsAuthenticated)
@@ -67,6 +71,7 @@
                         </a>
                     </li>
                 </ul>
+
             </div>
         </div>
     </div>
