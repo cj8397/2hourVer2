@@ -168,10 +168,18 @@ namespace _2Hours_Ver2.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        public ActionResult AdminOrders()
+        {
+            var orders = db.OrderDetails.ToList();
+            return PartialView("_AdminOrders",orders);
+        }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult AdminOrderDetails()
         {
-            var details = db.OrderDetails.ToList();
-            return PartialView("_AdminOrderDetails",details);
+            OrderRepo orderRepo = new OrderRepo();
+            OrderDetail orderDetail = orderRepo.GetOrderDetail();
+            return PartialView("AdminOrderDetails", orderDetail);
         }
 
         [Authorize(Roles = "Admin")]
@@ -262,7 +270,7 @@ namespace _2Hours_Ver2.Controllers
             AccountRepo accountRepo = new AccountRepo();
             var login = TempData["Login"];
             TempData["orders"] = db.OrderDetails.ToList();
-            TempData["profile"] = accountRepo.GetDetail((Login)login);
+            TempData["profile"] = accountRepo.GetProfileDetail((Login)login);
             return View();
         }
         [Authorize]
@@ -277,7 +285,7 @@ namespace _2Hours_Ver2.Controllers
         {
             AccountRepo accountRepo = new AccountRepo();
             var login = TempData["Login"];
-            AspNetUser aspNetUser = accountRepo.GetDetail((Login)login);
+            AspNetUser aspNetUser = accountRepo.GetProfileDetail((Login)login);
             return PartialView("_ProfileDetails",aspNetUser);
         }
 

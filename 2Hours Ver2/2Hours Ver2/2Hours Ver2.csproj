@@ -95,6 +95,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -104,6 +108,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -355,6 +363,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountRepo.cs" />
+    <Compile Include="Models\OrderRepo.cs" />
     <Compile Include="Models\ProductRepo.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -422,15 +431,15 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\UserArea.cshtml" />
     <Content Include="Views\Account\AdminOnly.cshtml" />
-    <Content Include="Views\Shared\_AdminOrderDetails.cshtml" />
+    <Content Include="Views\Shared\_AdminOrders.cshtml" />
     <Content Include="Views\Shared\_AdminSuppliers.cshtml" />
     <Content Include="Views\Shared\_AdminViewUsers.cshtml" />
     <Content Include="Views\Shared\_UserOrderDetails.cshtml" />
     <Content Include="Views\Shared\_ProfileDetails.cshtml" />
     <Content Include="Views\Shared\_AdminProducts.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
-    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\AdminProductAdd.cshtml" />
+    <Content Include="Views\Account\AdminOrderDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -439,7 +448,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\PayPal\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>

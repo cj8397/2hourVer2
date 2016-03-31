@@ -1,6 +1,6 @@
 ﻿// TODO: Replace with the URL of your WebService app
-var serviceUrl = 'http://webapi.inikkei-developer.com/api/Products';
-// http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api
+var serviceUrl = 'http://localhost:7127/api/Product';
+//http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api
 function sendRequest() {
     $.ajax({
         type: "Get",
@@ -44,19 +44,19 @@ function callback(val) {
 
 
 function find() {
-    var id = $('#productIdFind').val();
+    var id = $('#data').val();
     var url = serviceUrl + "/" + id;
     $.getJSON(url,
         function (data) {
             if (data == null) {
-                $('#productFind').text('Product not found.');
+                $('#data').text('Product not found.');
             }
             var str = data.name + ': ' + '$' + data.price;
-            $('#productFind').text(str);
+            $('#data').text(str);
         })
     .fail(
         function (jqueryHeaderRequest, textStatus, err) {
-            $('#productFind').text('Find error: ' + err);
+            $('#data').text('Find error: ' + err);
         });
 }
 
@@ -84,7 +84,7 @@ function create() {
         error: function (_httpRequest, _status, _httpError) {
             // XMLHttpRequest, textStatus, errorThrow
             $('#productCreate')
-            .text('Error while adding manufacturer.  XMLHttpRequest:'
+            .text('Error while adding product.  XMLHttpRequest:'
                     + _httpRequest + '  Status: ' + _status
                     + '  Http Error: ' + _httpError);
         }

@@ -37,18 +37,19 @@ namespace _2Hours_Ver2.Controllers
         [HttpPost]
         public ActionResult Index(string search)
         {
-            var product = db.Products
-                .Where(x => x.productName.StartsWith(search)) && db.Categories.Where( y => y.productType.StartsWith(search)
-                        || search == null
-                        || x.productName.Contains(search) // search by productName
-                        || y.productType.Contains(search) // search by productType
-                        );
+            //var product = db.Products
+            //    .Where(x => x.productName.StartsWith(search)) 
+            //           || search == null
+            //           || x.productName.Contains(search)); // search by productName
+            //            //|| y.productType.Contains(search) // search by productType
 
-            
 
-            ViewBag.search = true;
 
-            return View("ShopProducts", product);
+
+            //ViewBag.search = true;
+
+            //return View("ShopProducts", product);
+            return View();
         }
 
 

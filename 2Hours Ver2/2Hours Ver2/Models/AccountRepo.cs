@@ -23,7 +23,8 @@ namespace _2Hours_Ver2.Models
             return aspNetUser;
         }       
 
-        public AspNetUser GetDetail(Login login)
+        //Get profile details
+        public AspNetUser GetProfileDetail(Login login)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);

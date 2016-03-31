@@ -38,5 +38,9 @@ namespace _2Hours_Ver2.ViewModels
         }
 
         public decimal Total { get; set; }
+
+        public int OrderNumber { get; set; }
+        public DateTime OrderDate { get; set; }
+        public bool DeliveryStatus { get; set; }
     }
 }
