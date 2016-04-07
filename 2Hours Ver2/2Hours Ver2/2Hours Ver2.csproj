@@ -401,6 +401,7 @@
     <Compile Include="ViewModels\CartItem.cs" />
     <Compile Include="ViewModels\OrderDetails.cs" />
     <Compile Include="ViewModels\Login.cs" />
+    <Compile Include="ViewModels\OrderProductVM.cs" />
     <Compile Include="ViewModels\RegisteredUser.cs" />
     <Compile Include="ViewModels\UserRole.cs" />
     <Compile Include="ViewModels\Message.cs" />

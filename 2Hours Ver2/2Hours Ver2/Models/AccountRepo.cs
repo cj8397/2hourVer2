@@ -23,6 +23,23 @@ namespace _2Hours_Ver2.Models
             return aspNetUser;
         }
 
+
+        //public OrderDetail UpdateOrderDetail(string id,DateTime deliveryTime, int )
+        //{
+
+        //    mergedEntities db = new mergedEntities();
+        //    OrderDetail orderDetail = db.OrderDetails.Where(o => o.Id == id)
+        //                    .FirstOrDefault();
+        //    orderDetail.orderNumber = productID;
+        //    orderDetail.deliveryTime = deliveryTime;
+
+        //    db.SaveChanges();
+        //    return orderDetail;
+        //}
+
+
+
+
         //Get profile details
         // change public AspNetUser to public RegisteredUser
         public RegisteredUser GetProfileDetail(Login login)
