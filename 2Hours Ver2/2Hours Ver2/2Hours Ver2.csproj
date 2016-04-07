@@ -340,6 +340,7 @@
     <Compile Include="BusinessLogic\MailHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -449,6 +450,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Order\" />
     <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>

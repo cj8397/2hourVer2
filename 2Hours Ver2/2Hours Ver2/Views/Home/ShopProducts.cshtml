@@ -10,7 +10,7 @@
     @using (Ajax.BeginForm("Index", "Home", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "searchResults"}, new{ @class = "navbar__search pull-left", novalidate = "novalidate" }))
     {
         <input required="required" id="data" placeholder="Search for Product " name="search" value="" type="search" class="search">
-        <button type="submit"onclick="find();" class="navbar__search__icon" title="Search" data-track-action="navbar" data-track-label="searchicon">
+        <button type="submit" class="navbar__search__icon" title="Search" data-track-action="navbar" data-track-label="searchicon">
             <i class="fa fa-search" ></i>
         </button>
     }
