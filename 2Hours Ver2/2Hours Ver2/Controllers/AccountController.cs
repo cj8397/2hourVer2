@@ -391,8 +391,11 @@ namespace _2Hours_Ver2.Controllers
         {            
             return View();
         }
-        public ActionResult Update()
+        public ActionResult Update(RegisteredUser registeredUser)
         {
+            AccountRepo accountRepo = new AccountRepo();
+            accountRepo.UpdateUser(registeredUser.TelNumber, registeredUser.UserName);
+            
             return View();
         }
 
