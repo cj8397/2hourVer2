@@ -435,11 +435,12 @@
     <Content Include="Views\Shared\_AdminSuppliers.cshtml" />
     <Content Include="Views\Shared\_AdminViewUsers.cshtml" />
     <Content Include="Views\Shared\_UserOrderDetails.cshtml" />
-    <Content Include="Views\Shared\_ProfileDetails.cshtml" />
+    <Content Include="Views\Shared\_ProfileDetails1.cshtml" />
     <Content Include="Views\Shared\_AdminProducts.cshtml" />
     <Content Include="Views\Account\Update.cshtml" />
     <Content Include="Views\Account\AdminProductAdd.cshtml" />
     <Content Include="Views\Account\AdminOrderDetails.cshtml" />
+    <Content Include="Views\Account\_ProfileDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

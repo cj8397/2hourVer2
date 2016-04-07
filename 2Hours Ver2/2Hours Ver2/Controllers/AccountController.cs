@@ -285,7 +285,7 @@ namespace _2Hours_Ver2.Controllers
         {
             AccountRepo accountRepo = new AccountRepo();
             var login = TempData["Login"];
-            AspNetUser aspNetUser = accountRepo.GetProfileDetail((Login)login);
+            RegisteredUser aspNetUser = accountRepo.GetProfileDetail((Login)login);
             return PartialView("_ProfileDetails",aspNetUser);
         }
 
@@ -391,6 +391,10 @@ namespace _2Hours_Ver2.Controllers
         {            
             return View();
         }
+
+
+      
+        [HttpGet]
         public ActionResult Update(RegisteredUser registeredUser)
         {
             AccountRepo accountRepo = new AccountRepo();
