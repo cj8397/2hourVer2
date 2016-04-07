@@ -21,16 +21,17 @@ namespace _2Hours_Ver2.Models
 
             db.SaveChanges();
             return aspNetUser;
-        }       
+        }
 
         //Get profile details
-        public AspNetUser GetProfileDetail(Login login)
+        // change public AspNetUser to public RegisteredUser
+        public RegisteredUser GetProfileDetail(Login login)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             IdentityUser identityUser = manager.Find(login.UserName, login.Password);
             mergedEntities db = new mergedEntities();
-            AspNetUser USER = new AspNetUser();
+            RegisteredUser USER = new RegisteredUser();
 
             var query =
             from a in db.AspNetUsers
@@ -47,7 +48,7 @@ namespace _2Hours_Ver2.Models
             {
                 USER.Id = item.ID;
                 USER.UserName = item.UserName;
-                USER.PhoneNumber = item.PhoneNumber;
+                USER.TelNumber = item.PhoneNumber;
                 USER.Email = item.Email;
             }
 
