@@ -179,13 +179,18 @@ namespace _2Hours_Ver2.Controllers
         {
             OrderRepo orderRepo = new OrderRepo();
             OrderDetail orderDetail = orderRepo.GetOrderDetail();
-            return PartialView("AdminOrderDetails", orderDetail);
+            return View("AdminOrderDetails", orderDetail);
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult AdminOrderUpdate()
         {
             return View();
+        }
+
+        public ActionResult AdminOrderDelete()
+        {
+            return RedirectToAction("DeleteProduct", "ProductController");
         }
 
         [Authorize(Roles = "Admin")]
@@ -211,6 +216,12 @@ namespace _2Hours_Ver2.Controllers
         public ActionResult AdminProductUpdate()
         {
             return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminProductDelete()
+        {
+            return RedirectToAction("DeleteProduct", "ProductController");
         }
 
         [Authorize(Roles = "Admin")]
