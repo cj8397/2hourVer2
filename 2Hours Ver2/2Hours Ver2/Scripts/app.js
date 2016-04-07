@@ -124,6 +124,7 @@ function update() {
     });
 }
 
+//Delete product
 function del() {
     var id = $('#productID').val();
     $.ajax({
@@ -138,6 +139,28 @@ function del() {
     }).fail(
         function (jqueryHeaderRequest, textStatus, err) {
             $('#productDelete').text('Delete error: ' + err);
+        });
+}
+
+
+//---------------------------------------------------------------
+//                          ORDERS
+//---------------------------------------------------------------
+//Delete order
+function del() {
+    var id = $('#orderID').val();
+    $.ajax({
+        url: serviceUrl + "/" + id,
+        type: 'DELETE',
+        dataType: 'json',
+
+        success: function (data) {
+            $('#orderDelete').text('Delete successful.');
+            updateList();
+        }
+    }).fail(
+        function (jqueryHeaderRequest, textStatus, err) {
+            $('#orderDelete').text('Delete error: ' + err);
         });
 }
 
