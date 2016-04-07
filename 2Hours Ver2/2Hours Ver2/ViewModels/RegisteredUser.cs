@@ -10,6 +10,10 @@ namespace _2Hours_Ver2.ViewModel
     public class RegisteredUser
     {
         [Required]
+        [Display(Name = "User ID")]
+        public string Id { get; set; }
+
+        [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
