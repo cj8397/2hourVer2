@@ -394,7 +394,7 @@ namespace _2Hours_Ver2.Controllers
 
 
       
-        [HttpGet]
+
         public ActionResult Update(RegisteredUser registeredUser)
         {
             AccountRepo accountRepo = new AccountRepo();
