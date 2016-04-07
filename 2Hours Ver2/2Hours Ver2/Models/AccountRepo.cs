@@ -10,11 +10,11 @@ namespace _2Hours_Ver2.Models
     public class AccountRepo
     {
 
-        public AspNetUser UpdateUser(string id, string phone, string userName)
+        public AspNetUser UpdateUser(string phone, string userName)
         {
 
             mergedEntities db = new mergedEntities();
-            AspNetUser aspNetUser = db.AspNetUsers.Where(a => a.Id == id)
+            AspNetUser aspNetUser = db.AspNetUsers.Where(a => a.UserName == userName)
                             .FirstOrDefault();
             aspNetUser.PhoneNumber = phone;
             aspNetUser.UserName = userName;
