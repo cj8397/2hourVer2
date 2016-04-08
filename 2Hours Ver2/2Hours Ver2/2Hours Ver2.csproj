@@ -401,6 +401,7 @@
     <Compile Include="ViewModels\CartItem.cs" />
     <Compile Include="ViewModels\OrderDetails.cs" />
     <Compile Include="ViewModels\Login.cs" />
+    <Compile Include="ViewModels\OrderProductVM.cs" />
     <Compile Include="ViewModels\RegisteredUser.cs" />
     <Compile Include="ViewModels\UserRole.cs" />
     <Compile Include="ViewModels\Message.cs" />
@@ -442,6 +443,9 @@
     <Content Include="Views\Account\AdminProductAdd.cshtml" />
     <Content Include="Views\Account\AdminOrderDetails.cshtml" />
     <Content Include="Views\Shared\_ProfileDetails.cshtml" />
+    <Content Include="Views\Account\DetailOrderProduct1.cshtml" />
+    <Content Include="Views\Account\DetailsOrderProduct2.cshtml" />
+    <Content Include="Views\Account\DetailsOrderProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

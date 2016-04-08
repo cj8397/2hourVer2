@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2Hours_Ver2.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -137,6 +138,7 @@ namespace _2Hours_Ver2.Controllers
             {
                 return db.Products.Count(e => e.productID == id) > 0;
             }
+
         }
     }
 }

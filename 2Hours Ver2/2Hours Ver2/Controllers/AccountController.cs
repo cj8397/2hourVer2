@@ -394,10 +394,7 @@ namespace _2Hours_Ver2.Controllers
                 ViewBag.Result = "<p class='alert alert-danger'>Error! Your password has not been reset.</p>";
             return View();
         }
-        public ActionResult Details()
-        {           
-            return View();
-        }
+        
         public ActionResult Create()
         {            
             return View();
@@ -414,9 +411,43 @@ namespace _2Hours_Ver2.Controllers
             return View();
         }
 
+        // Returning order's details
+        public ActionResult DetailsOrderProduct(int id)
+        {
+            ProductRepo productRepo = new ProductRepo();
+            return View(productRepo.GetDetail(id));
+        }
+
+        /*
+        [HttpGet]
+        public ActionResult Edit(int id,int idProduct) // "id" is "id order number".
+        {
+            ProductRepo productRepo = new ProductRepo();
+            OrderProductVM orderProductVM = new OrderProductVM();
 
 
+            orderProductVM = productRepo.GetDetail(id,idProduct);
+            return View(orderProductVM);
+        }
 
+        [HttpPost]
+        public ActionResult Edit(ClientBankAccountVM clientBankAccountVM)
+        {
+            ClientBankAccountRepo clientBankAccountRepo = new ClientBankAccountRepo();
+            ClientBankAccountVM editedClientBankAccountVM = new ClientBankAccountVM();
 
+            if (ModelState.IsValid)
+            {
+                editedClientBankAccountVM = clientBankAccountRepo.UpdateClientBankAccount(clientBankAccountVM);
+                return RedirectToAction("Detail", new { id = clientBankAccountVM.ClientID });
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "This entry is invalid.";
+                return View(clientBankAccountVM);
+            }
+
+        }
+        */
     }//end account controller
 }
