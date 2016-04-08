@@ -1,0 +1,21 @@
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\csc.exe
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\System.Collections.Immutable.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\System.Reflection.Metadata.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\vbc.exe
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\VBCSCompiler.exe
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\roslyn\VBCSCompiler.exe.config
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\2Hours Ver2.dll.config
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\2Hours Ver2.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\2Hours Ver2.pdb
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\System.Web.Cors.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\System.Web.Http.Cors.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\bin\System.Web.Http.Cors.xml
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\obj\Debug\2Hours Ver2.dll
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\obj\Debug\2Hours Ver2.pdb
+C:\2hoursPhase3\2Hours Ver2\2Hours Ver2\obj\Debug\2Hours Ver2.csprojResolveAssemblyReference.cache
