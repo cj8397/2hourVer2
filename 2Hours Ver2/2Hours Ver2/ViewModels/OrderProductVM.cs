@@ -16,7 +16,11 @@ namespace _2Hours_Ver2.ViewModels
 
         [Required]
         [Display(Name = "Product ID")]
-        public int ProductID { get; set; }
+        public int ProductId { get; set; }
+
+        [Required]
+        [Display(Name = "Product Name")]
+        public string ProductName { get; set; }
 
         [Required]
         [Display(Name = "Quantity")]
