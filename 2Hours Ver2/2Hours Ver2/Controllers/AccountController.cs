@@ -418,7 +418,7 @@ namespace _2Hours_Ver2.Controllers
             return View(productRepo.GetDetail(id));
         }
 
-        /* In process
+        /* In
         [HttpGet]
         public ActionResult Edit(int id,int idProduct) // "id" is "id order number".
         {
