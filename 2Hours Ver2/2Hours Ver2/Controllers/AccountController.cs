@@ -418,36 +418,48 @@ namespace _2Hours_Ver2.Controllers
             return View(productRepo.GetDetail(id));
         }
 
-        /* In
+        
         [HttpGet]
-        public ActionResult Edit(int id,int idProduct) // "id" is "id order number".
+        public ActionResult EditOrderProduct(int id,int productId) // "id" is "id order number".
         {
             ProductRepo productRepo = new ProductRepo();
             OrderProductVM orderProductVM = new OrderProductVM();
 
 
-            orderProductVM = productRepo.GetDetail(id,idProduct);
+            orderProductVM = productRepo.GetOrderProductDetail(id, productId);
             return View(orderProductVM);
         }
 
         [HttpPost]
-        public ActionResult Edit(ClientBankAccountVM clientBankAccountVM)
+        public ActionResult EditOrderProduct(OrderProductVM orderProductVM)
         {
-            ClientBankAccountRepo clientBankAccountRepo = new ClientBankAccountRepo();
-            ClientBankAccountVM editedClientBankAccountVM = new ClientBankAccountVM();
+            ProductRepo productRepo = new ProductRepo();
+            OrderProductVM editedOrderProductVM = new OrderProductVM();
 
             if (ModelState.IsValid)
             {
-                editedClientBankAccountVM = clientBankAccountRepo.UpdateClientBankAccount(clientBankAccountVM);
-                return RedirectToAction("Detail", new { id = clientBankAccountVM.ClientID });
+                editedOrderProductVM = productRepo.UpdateOrderProduct(orderProductVM);
+                return RedirectToAction("DetailsOrderProduct", new { id = orderProductVM.OrderNumber });
             }
             else
             {
                 ViewBag.ErrorMessage = "This entry is invalid.";
-                return View(clientBankAccountVM);
+                return View(orderProductVM);
             }
 
         }
-        */
+
+        public ActionResult DeleteOrderProduct(int id, int productId)
+        {
+            ProductRepo productRepo = new ProductRepo();            
+
+            if (ModelState.IsValid)
+            {
+                productRepo.DeleteOrderProduct(id,productId);                 
+            }
+            return RedirectToAction("DetailsOrderProduct", new { id = id });
+
+        }
+
     }//end account controller
 }
