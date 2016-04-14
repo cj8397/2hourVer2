@@ -418,7 +418,7 @@ namespace _2Hours_Ver2.Controllers
             return View(productRepo.GetDetail(id));
         }
 
-        
+
         [HttpGet]
         public ActionResult EditOrderProduct(int id,int productId) // "id" is "id order number".
         {
@@ -439,7 +439,7 @@ namespace _2Hours_Ver2.Controllers
             if (ModelState.IsValid)
             {
                 editedOrderProductVM = productRepo.UpdateOrderProduct(orderProductVM);
-                return RedirectToAction("DetailsOrderProduct", new { id = orderProductVM.OrderNumber });
+                return RedirectToAction("DetailsOrderProduct", new { id = orderProductVM });
             }
             else
             {
@@ -458,6 +458,36 @@ namespace _2Hours_Ver2.Controllers
                 productRepo.DeleteOrderProduct(id,productId);                 
             }
             return RedirectToAction("DetailsOrderProduct", new { id = id });
+
+        }
+        
+        [HttpGet]
+        public ActionResult EditProducts(int id)
+        {
+            ProductRepo productRepo = new ProductRepo();
+            ProductVM productVM = new ProductVM();
+
+            productVM = productRepo.GetProductDetail(id);
+            return View(productVM);
+        }
+
+
+        [HttpPost]
+        public ActionResult EditProducts(ProductVM productVM)
+        {
+            ProductRepo productRepo = new ProductRepo();
+            ProductVM editedProductVM = new ProductVM();
+
+            if (ModelState.IsValid)
+            {
+                editedProductVM = productRepo.UpdateProduct(productVM);
+                return RedirectToAction("AdminOnly");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "This entry is invalid.";
+                return View(productVM);
+            }
 
         }
 

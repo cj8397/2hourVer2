@@ -88,5 +88,59 @@ namespace _2Hours_Ver2.Models
             db.SaveChanges();
         }
 
+
+        public ProductVM GetProductDetail(int id)
+        {
+            mergedEntities db = new mergedEntities();
+            ProductVM productVM = new ProductVM();
+
+            var query =
+
+             from p in db.Products
+             where (p.productID == id)
+            
+             select new ProductVM()
+             //select new
+             {
+                 ProductId = p.productID,
+                 
+                 ProductName = p.productName,
+                 Unit = p.unit,
+                 ProductType = p.producType,
+                 SupplierId = (int)p.supplierID,
+                 Price = (decimal)p.price
+             };
+
+            foreach (var item in query)
+            {
+
+                productVM.ProductId = item.ProductId;
+                productVM.ProductName = item.ProductName;
+                productVM.Unit = item.Unit;
+                productVM.ProductType = item.ProductType;
+                productVM.SupplierId = item.SupplierId;
+                productVM.Price = item.Price;
+            }
+
+
+            return productVM;
+        }
+
+        public ProductVM UpdateProduct(ProductVM productVM)
+        {
+            mergedEntities db = new mergedEntities();
+            Product product = db.Products.Where(p => p.productID == productVM.ProductId &&
+                                                         p.supplierID == productVM.SupplierId).FirstOrDefault();
+            product.productID = productVM.ProductId;
+            product.productName = productVM.ProductName;
+            product.productName = productVM.ProductType;
+            product.supplierID = productVM.SupplierId;
+            product.price = productVM.Price;
+            product.unit = productVM.Unit;
+
+            db.SaveChanges();
+            return productVM;
+        }
+
     }
 }

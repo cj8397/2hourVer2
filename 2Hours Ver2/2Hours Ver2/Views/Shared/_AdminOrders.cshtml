@@ -42,9 +42,10 @@
             @Html.DisplayFor(modelItem => item.totalPrice)
         </td>
         <td>
-            @Html.ActionLink("Details", "AdminOrderDetails", "Account", new { @class = "btn btn-default" })
+            @Html.ActionLink("Edit", "AdminOrderDetails", "Account", new { @class = "btn btn-default" })
+            @Html.ActionLink("Details", "DetailsOrderProduct", new { id = item.orderNumber }, new { @class = "btn btn-default" })
         </td>
     </tr>
 }
-
+    
 </table>
