@@ -402,6 +402,7 @@
     <Compile Include="ViewModels\OrderDetails.cs" />
     <Compile Include="ViewModels\Login.cs" />
     <Compile Include="ViewModels\OrderProductVM.cs" />
+    <Compile Include="ViewModels\ProductVM.cs" />
     <Compile Include="ViewModels\RegisteredUser.cs" />
     <Compile Include="ViewModels\UserRole.cs" />
     <Compile Include="ViewModels\Message.cs" />
@@ -447,6 +448,8 @@
     <Content Include="Views\Account\DetailsOrderProduct2.cshtml" />
     <Content Include="Views\Account\DetailsOrderProduct.cshtml" />
     <Content Include="Views\Account\EditOrderProduct.cshtml" />
+    <Content Include="Views\Account\EditProducts.cshtml" />
+    <Content Include="Views\Account\DetailsProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
