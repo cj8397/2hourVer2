@@ -38,3 +38,29 @@ ul.nav navbar-nav li:hover a
   background: -o-linear-gradient(#fff, #ccc);
   background: -webkit-linear-gradient(#fff, #ccc);
   text-shadow: none;}
+
+.headline-shadow-48 h2 {
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    font-size: 56px;
+    color: #fff !important;
+    text-align: center;
+    margin: 5px 0px 10px 0px !important;
+    padding: 0px 0px 5px 0px !important;
+}
+
+.headline-shadow-24, .headline-shadow-24 p {
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -1px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5) !important;
+}
+.skrollable h2, .skrollable p, .skrollable h3 {
+    color: white;
+}
+
+.light p {
+    color: #FFF;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
