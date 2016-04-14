@@ -418,12 +418,6 @@ namespace _2Hours_Ver2.Controllers
             return View(productRepo.GetDetail(id));
         }
 
-        public ActionResult DetailsProduct(int id)
-        {
-            ProductRepo productRepo = new ProductRepo();
-            return View(productRepo.GetProductDetail(id));
-        }
-
 
         [HttpGet]
         public ActionResult EditOrderProduct(int id,int productId) // "id" is "id order number".

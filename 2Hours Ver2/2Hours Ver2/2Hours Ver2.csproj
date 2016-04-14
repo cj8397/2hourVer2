@@ -444,12 +444,9 @@
     <Content Include="Views\Account\AdminProductAdd.cshtml" />
     <Content Include="Views\Account\AdminOrderDetails.cshtml" />
     <Content Include="Views\Shared\_ProfileDetails.cshtml" />
-    <Content Include="Views\Account\DetailOrderProduct1.cshtml" />
-    <Content Include="Views\Account\DetailsOrderProduct2.cshtml" />
     <Content Include="Views\Account\DetailsOrderProduct.cshtml" />
     <Content Include="Views\Account\EditOrderProduct.cshtml" />
     <Content Include="Views\Account\EditProducts.cshtml" />
-    <Content Include="Views\Account\DetailsProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
