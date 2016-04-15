@@ -454,6 +454,7 @@
     <Content Include="Views\Account\DetailsOrderProduct.cshtml" />
     <Content Include="Views\Account\EditOrderProduct.cshtml" />
     <Content Include="Views\Account\EditProducts.cshtml" />
+    <Content Include="Views\Account\EditOrderDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -418,6 +418,38 @@ namespace _2Hours_Ver2.Controllers
             return View(productRepo.GetDetail(id));
         }
 
+        // Editing an order
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public ActionResult EditOrderDetail(int id) // "id" is "id order number".
+        {
+            OrderRepo orderRepo = new OrderRepo();
+            OrderDetails orderDetails = new OrderDetails();
+
+
+            orderDetails = orderRepo.GetOrderDetail(id);
+            return View(orderDetails);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult EditOrderDetail(OrderDetails orderDetails)
+        {
+            OrderRepo orderRepo = new OrderRepo();
+            OrderDetails editedOrderDetails = new OrderDetails();
+
+            if (ModelState.IsValid)
+            {
+                editedOrderDetails = orderRepo.UpdateOrder(orderDetails);
+                return RedirectToAction("AdminOnly");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "This entry is invalid.";
+                return View(orderDetails);
+            }
+        }
+
 
         [HttpGet]
         public ActionResult EditOrderProduct(int id,int productId) // "id" is "id order number".
@@ -439,7 +471,7 @@ namespace _2Hours_Ver2.Controllers
             if (ModelState.IsValid)
             {
                 editedOrderProductVM = productRepo.UpdateOrderProduct(orderProductVM);
-                return RedirectToAction("DetailsOrderProduct", new { id = orderProductVM });
+                return RedirectToAction("DetailsOrderProduct", new { id = orderProductVM.OrderNumber });
             }
             else
             {

@@ -41,6 +41,7 @@ namespace _2Hours_Ver2.ViewModels
 
         public int OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
+        public DateTime OrderDelivery { get; set; }
         public bool DeliveryStatus { get; set; }
     }
 }

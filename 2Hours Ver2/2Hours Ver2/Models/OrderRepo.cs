@@ -35,6 +35,51 @@ namespace _2Hours_Ver2.Models
             return order;
         }
 
+        // for admin area
+        public OrderDetails GetOrderDetail(int orderNumber)
+        {
+            mergedEntities db = new mergedEntities();
+            OrderDetails orderDetails = new OrderDetails();
+
+            var query =
+
+             from o in db.OrderDetails
+             where (o.orderNumber == orderNumber)
+
+             select new OrderDetails()
+             //select new
+             {
+                 OrderNumber = o.orderNumber,
+                 OrderDate = (DateTime)o.orderDate,
+                 OrderDelivery = (DateTime)o.deliveryTime,
+                 DeliveryStatus = (bool)o.deliveryStatus
+             };
+
+            foreach (var item in query)
+            {
+
+                orderDetails.OrderNumber = item.OrderNumber;
+                orderDetails.OrderDate = item.OrderDate;
+                orderDetails.OrderDelivery = item.OrderDelivery;
+                orderDetails.DeliveryStatus = item.DeliveryStatus;
+            }
+
+
+            return orderDetails;
+        }
+
+        public OrderDetails UpdateOrder(OrderDetails orderDetails)
+        {
+            mergedEntities db = new mergedEntities();
+            OrderDetail orderDetail = db.OrderDetails.Where(o => o.orderNumber == orderDetails.OrderNumber).FirstOrDefault();
+            orderDetail.orderNumber = orderDetails.OrderNumber;
+            orderDetail.orderDate = orderDetails.OrderDate;
+            orderDetail.deliveryTime = orderDetails.OrderDelivery;
+            orderDetail.deliveryStatus = orderDetails.DeliveryStatus;
+            db.SaveChanges();
+            return orderDetails;
+        }
+
 
 
 
